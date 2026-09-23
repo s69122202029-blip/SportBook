@@ -1,913 +1,1517 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SportBook - ระบบจองสนามกีฬา</title>
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    background: #f5f7fb;
-    color: #172033;
-    line-height: 1.6;
-}
-
-button,
-input,
-select {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-}
-
-/* =========================
-   COLORS
-========================= */
-
-:root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #06b6d4;
-    --green: #10b981;
-    --orange: #f59e0b;
-    --red: #ef4444;
-    --dark: #172033;
-    --gray: #64748b;
-    --light: #f5f7fb;
-    --white: #ffffff;
-    --border: #e2e8f0;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(10px);
-
-    border-bottom: 1px solid var(--border);
-
-    padding: 14px 6%;
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    font-size: 23px;
-    font-weight: 800;
-    color: var(--primary);
-
-    cursor: pointer;
-}
-
-.logo-icon {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-
-    color: white;
-    font-size: 22px;
-
-    box-shadow: 0 7px 18px rgba(37,99,235,.25);
-}
-
-.nav-menu {
-    display: flex;
-    gap: 8px;
-    list-style: none;
-}
-
-.nav-menu button {
-    background: transparent;
-    padding: 10px 15px;
-    border-radius: 10px;
-
-    color: var(--gray);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.nav-menu button:hover,
-.nav-menu button.active {
-    background: #eff6ff;
-    color: var(--primary);
-}
-
-/* =========================
-   PAGE
-========================= */
-
-.page {
-    display: none;
-    min-height: calc(100vh - 72px);
-}
-
-.page.active {
-    display: block;
-}
-
-.container {
-    width: min(1180px, 92%);
-    margin: auto;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 500px;
-
-    display: flex;
-    align-items: center;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(15,23,42,.92),
-            rgba(15,23,42,.55),
-            rgba(15,23,42,.15)
-        ),
-        url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=85");
-
-    background-size: cover;
-    background-position: center;
-
-    color: white;
-}
-
-.hero-content {
-    width: min(650px, 90%);
-    padding: 70px 0;
-}
-
-.hero-badge {
-    display: inline-block;
-
-    padding: 7px 13px;
-
-    background: rgba(255,255,255,.15);
-    border: 1px solid rgba(255,255,255,.25);
-
-    border-radius: 20px;
-
-    margin-bottom: 18px;
-}
-
-.hero h1 {
-    font-size: clamp(40px, 7vw, 70px);
-    line-height: 1.05;
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    color: #67e8f9;
-}
-
-.hero p {
-    font-size: 18px;
-    color: #e2e8f0;
-    margin-bottom: 28px;
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-.btn {
-    padding: 12px 20px;
-    border-radius: 12px;
-
-    font-weight: 700;
-
-    transition: .2s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--primary-dark);
-}
-
-.btn-white {
-    background: white;
-    color: var(--primary);
-}
-
-/* =========================
-   SECTION
-========================= */
-
-.section {
-    padding: 60px 0;
-}
-
-.section-title {
-    margin-bottom: 30px;
-}
-
-.section-title h2 {
-    font-size: 30px;
-    margin-bottom: 5px;
-}
-
-.section-title p {
-    color: var(--gray);
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 22px;
-}
-
-.card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
-
-    box-shadow: 0 8px 25px rgba(15,23,42,.05);
-
-    transition: .25s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(15,23,42,.1);
-}
-
-.card-image {
-    height: 190px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card-body h3 {
-    margin-bottom: 7px;
-}
-
-.card-body p {
-    color: var(--gray);
-    font-size: 14px;
-}
-
-.price {
-    color: var(--primary);
-    font-size: 20px;
-    font-weight: 800;
-    margin: 10px 0;
-}
-
-.rating {
-    color: var(--orange);
-}
-
-/* =========================
-   QUICK MENU
-========================= */
-
-.quick-menu {
-    margin-top: -45px;
-    position: relative;
-    z-index: 5;
-}
-
-.quick-box {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 15px;
-
-    box-shadow: 0 15px 40px rgba(15,23,42,.1);
-}
-
-.quick-item {
-    padding: 20px;
-    border-radius: 15px;
-    background: #f8fafc;
-}
-
-.quick-item span {
-    font-size: 28px;
-}
-
-/* =========================
-   BOOKING PAGE
-========================= */
-
-.booking-header {
-    padding: 55px 0 25px;
-}
-
-.filter-box {
-    background: white;
-    padding: 20px;
-
-    border: 1px solid var(--border);
-    border-radius: 15px;
-
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 12px;
-
-    margin-bottom: 30px;
-}
-
-.input {
-    width: 100%;
-
-    padding: 12px 14px;
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    outline: none;
-}
+    <title>SportBook | จองสนามกีฬาและวางแผนการซ้อม</title>
 
-.input:focus {
-    border-color: var(--primary);
-}
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* =========================
-   TRAINING
-========================= */
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-.form-card {
-    background: white;
-    padding: 25px;
-
-    border-radius: 18px;
-    border: 1px solid var(--border);
-
-    margin-bottom: 30px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
-}
+    <style>
 
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 700;
-}
-
-.training-list {
-    display: grid;
-    gap: 12px;
-}
-
-.training-item {
-    background: white;
-    padding: 18px;
-
-    border-radius: 15px;
-    border: 1px solid var(--border);
-
-    display: flex;
-    justify-content: space-between;
-}
-
-/* =========================
-   TICKET
-========================= */
+        /* =========================================
+           RESET
+        ========================================= */
 
-.ticket-page {
-    padding: 55px 0;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.ticket {
-    background: white;
+        html {
+            scroll-behavior: smooth;
+        }
 
-    border-radius: 20px;
+        body {
+            font-family: "Prompt", sans-serif;
+            background: #f6f9fc;
+            color: #14213d;
+            line-height: 1.6;
+        }
 
-    border: 1px solid var(--border);
+        button,
+        input,
+        select,
+        textarea {
+            font-family: "Prompt", sans-serif;
+        }
 
-    overflow: hidden;
+        button {
+            cursor: pointer;
+        }
 
-    box-shadow: 0 15px 40px rgba(15,23,42,.08);
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    margin-bottom: 40px;
-}
+        /* =========================================
+           VARIABLES
+        ========================================= */
 
-.ticket-top {
-    padding: 25px;
+        :root {
+            --primary: #1677ff;
+            --primary-dark: #0758c9;
+            --cyan: #00c6ff;
 
-    background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
+            --luxury-blue: #071a33;
+            --luxury-navy: #0b2447;
 
-    color: white;
+            --gold: #d6ad60;
+            --gold-light: #f1d58a;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+            --text: #14213d;
+            --gray: #64748b;
+            --light-gray: #e8eef5;
 
-.ticket-id {
-    font-size: 13px;
-    opacity: .85;
-}
+            --white: #ffffff;
 
-.status {
-    padding: 7px 12px;
+            --shadow:
+                0 12px 35px rgba(7, 36, 71, 0.08);
 
-    background: rgba(255,255,255,.2);
+            --radius: 18px;
+        }
 
-    border-radius: 20px;
-}
+        /* =========================================
+           NAVBAR
+        ========================================= */
 
-.ticket-body {
-    padding: 28px;
-}
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
 
-.ticket-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
-}
+            height: 72px;
 
-.ticket-info small {
-    display: block;
-    color: var(--gray);
-    margin-bottom: 3px;
-}
+            padding: 0 6%;
 
-.ticket-info strong {
-    font-size: 17px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-.ticket-bottom {
-    padding: 20px 28px;
+            background: rgba(255,255,255,.96);
 
-    border-top: 1px dashed var(--border);
+            backdrop-filter: blur(18px);
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+            border-bottom: 1px solid #e5eaf2;
 
-.ticket-price {
-    font-size: 25px;
-    color: var(--primary);
-    font-weight: 800;
-}
+            box-shadow:
+                0 5px 25px rgba(7,36,71,.06);
+        }
 
-/* =========================
-   GRAPH
-========================= */
+        /* =========================================
+           LOGO
+        ========================================= */
 
-.theory-section {
-    margin-top: 35px;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
 
-.theory-card {
-    background: white;
+            cursor: pointer;
+            user-select: none;
 
-    border: 1px solid var(--border);
+            transition: .25s ease;
+        }
 
-    border-radius: 18px;
+        .logo:hover {
+            transform: translateY(-1px);
+        }
 
-    padding: 25px;
+        .logo-mark {
+            width: 46px;
+            height: 46px;
 
-    margin-bottom: 20px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.theory-card h3 {
-    margin-bottom: 10px;
-}
+            filter:
+                drop-shadow(
+                    0 6px 14px
+                    rgba(7, 88, 201, .25)
+                );
+        }
 
-.vertex-grid {
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-    gap: 12px;
+        .logo-mark svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
 
-    margin: 20px 0;
-}
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
 
-.vertex {
-    padding: 15px 5px;
+        .logo-main,
+        .logo-accent {
+            font-family: "Montserrat", sans-serif;
 
-    text-align: center;
+            font-size: 21px;
 
-    border-radius: 12px;
+            font-weight: 800;
 
-    background: #eff6ff;
-    color: var(--primary);
+            letter-spacing: -0.8px;
+        }
 
-    border: 1px solid #bfdbfe;
+        .logo-main {
+            color: #0b2447;
+        }
 
-    font-weight: 700;
-}
+        .logo-accent {
+            color: #0878ed;
+        }
 
-.edges {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px;
-}
+        .logo-text small {
+            margin-top: 5px;
 
-.edge {
-    background: #f8fafc;
+            font-family: "Montserrat", sans-serif;
 
-    padding: 12px;
+            font-size: 6.5px;
 
-    border-radius: 10px;
+            letter-spacing: 1.7px;
 
-    border: 1px solid var(--border);
-}
+            color: #9a7b3f;
 
-.adjacency {
-    background: #0f172a;
+            font-weight: 700;
+        }
 
-    color: #e2e8f0;
+        /* =========================================
+           NAV LINKS
+        ========================================= */
 
-    padding: 20px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    border-radius: 12px;
+        .nav-links button {
+            border: none;
+            background: transparent;
 
-    overflow-x: auto;
+            color: #475569;
 
-    font-family: monospace;
+            padding: 10px 14px;
 
-    line-height: 2;
-}
+            border-radius: 10px;
 
-.path-box {
-    background: #ecfeff;
+            font-size: 14px;
 
-    border: 1px solid #a5f3fc;
+            transition: .25s;
+        }
 
-    color: #155e75;
+        .nav-links button:hover,
+        .nav-links button.active {
+            color: var(--primary);
 
-    padding: 18px;
+            background: #edf5ff;
+        }
 
-    border-radius: 12px;
+        /* =========================================
+           MAIN
+        ========================================= */
 
-    font-weight: 700;
-}
+        main {
+            min-height: calc(100vh - 72px);
+        }
 
-/* =========================
-   TREE
-========================= */
+        .page {
+            display: none;
+            animation: fadeIn .35s ease;
+        }
 
-.tree {
-    background: #f8fafc;
+        .page.active {
+            display: block;
+        }
 
-    border-radius: 15px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
 
-    padding: 25px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    overflow-x: auto;
-}
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.tree ul {
-    list-style: none;
-    padding-left: 30px;
-}
+        /* =========================================
+           HERO
+        ========================================= */
 
-.tree li {
-    margin: 12px 0;
-    position: relative;
-}
+        .hero {
+            min-height: 590px;
 
-.tree-node {
-    display: inline-block;
+            display: flex;
+            align-items: center;
 
-    padding: 9px 15px;
+            background:
+                linear-gradient(
+                    115deg,
+                    rgba(7,26,51,.97),
+                    rgba(7,88,201,.90)
+                ),
+                url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=80");
 
-    background: white;
+            background-size: cover;
+            background-position: center;
 
-    border: 1px solid #cbd5e1;
+            color: white;
 
-    border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    font-weight: 600;
-}
+        .hero::before {
+            content: "";
 
-.root {
-    background: #dbeafe;
-    color: #1d4ed8;
-    border-color: #93c5fd;
-}
+            position: absolute;
 
-.parent {
-    background: #dcfce7;
-    color: #15803d;
-    border-color: #86efac;
-}
+            width: 500px;
+            height: 500px;
 
-.child {
-    background: #fef3c7;
-    color: #92400e;
-    border-color: #fcd34d;
-}
+            border-radius: 50%;
 
-.leaf {
-    background: #fce7f3;
-    color: #be185d;
-    border-color: #f9a8d4;
-}
+            background: rgba(0,198,255,.12);
 
-.bfs-box {
-    background: #f5f3ff;
+            right: -180px;
+            top: -180px;
+        }
 
-    border: 1px solid #ddd6fe;
+        .hero::after {
+            content: "";
 
-    color: #6d28d9;
+            position: absolute;
 
-    padding: 18px;
+            width: 350px;
+            height: 350px;
 
-    border-radius: 12px;
+            border-radius: 50%;
 
-    font-weight: 700;
+            border: 1px solid rgba(255,255,255,.15);
 
-    line-height: 1.9;
-}
+            right: 10%;
+            bottom: -220px;
+        }
 
-/* =========================
-   MODAL
-========================= */
+        .hero-content {
+            position: relative;
+            z-index: 2;
 
-.modal {
-    display: none;
+            max-width: 720px;
+        }
 
-    position: fixed;
+        .hero-badge {
+            display: inline-block;
 
-    inset: 0;
+            padding: 7px 15px;
 
-    background: rgba(15,23,42,.65);
+            border: 1px solid rgba(255,255,255,.25);
 
-    z-index: 2000;
+            background: rgba(255,255,255,.08);
 
-    align-items: center;
-    justify-content: center;
+            border-radius: 30px;
 
-    padding: 20px;
-}
+            font-size: 13px;
 
-.modal.show {
-    display: flex;
-}
+            margin-bottom: 18px;
+        }
 
-.modal-content {
-    width: min(500px,100%);
+        .hero h1 {
+            font-family: "Montserrat", "Prompt", sans-serif;
 
-    background: white;
+            font-size: clamp(38px, 6vw, 70px);
 
-    border-radius: 20px;
+            line-height: 1.05;
 
-    padding: 28px;
+            margin-bottom: 22px;
 
-    animation: pop .2s ease;
-}
+            font-weight: 800;
+        }
 
-@keyframes pop {
-    from {
-        transform: scale(.95);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+        .hero h1 span {
+            color: #62d9ff;
+        }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
+        .hero p {
+            font-size: 18px;
 
-.close {
-    width: 35px;
-    height: 35px;
+            color: #dcecff;
 
-    border-radius: 50%;
+            max-width: 600px;
 
-    background: #f1f5f9;
+            margin-bottom: 30px;
+        }
 
-    font-size: 20px;
-}
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-.modal-form {
-    display: grid;
-    gap: 14px;
-}
+        /* =========================================
+           BUTTONS
+        ========================================= */
 
-/* =========================
-   TOAST
-========================= */
+        .btn {
+            border: none;
 
-.toast {
-    position: fixed;
+            padding: 12px 21px;
 
-    bottom: 25px;
-    right: 25px;
+            border-radius: 12px;
 
-    background: #0f172a;
-    color: white;
+            font-weight: 600;
 
-    padding: 14px 20px;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
 
-    border-radius: 12px;
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0758c9,
+                    #1677ff,
+                    #00aef0
+                );
 
-    opacity: 0;
-    pointer-events: none;
+            color: white;
 
-    transform: translateY(20px);
+            box-shadow:
+                0 8px 20px
+                rgba(22,119,255,.25);
+        }
 
-    transition: .3s;
+        .btn-primary:hover {
+            transform: translateY(-3px);
 
-    z-index: 3000;
-}
+            box-shadow:
+                0 12px 28px
+                rgba(22,119,255,.35);
+        }
 
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
 
-/* =========================
-   FOOTER
-========================= */
+        .btn-outline {
+            background: white;
 
-footer {
-    background: #0f172a;
-    color: #cbd5e1;
+            color: var(--primary);
 
-    text-align: center;
+            border: 1px solid #d8e3f0;
+        }
 
-    padding: 30px;
+        .btn-gold {
+            background:
+                linear-gradient(
+                    135deg,
+                    #b88a35,
+                    #d6ad60,
+                    #f1d58a
+                );
 
-    margin-top: 50px;
-}
+            color: #fff;
+        }
 
-/* =========================
-   RESPONSIVE
-========================= */
+        /* =========================================
+           SECTION
+        ========================================= */
 
-@media(max-width:900px) {
+        .section {
+            padding: 70px 0;
+        }
 
-    .grid {
-        grid-template-columns: repeat(2,1fr);
-    }
+        .section-title {
+            text-align: center;
 
-    .ticket-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
+            margin-bottom: 40px;
+        }
 
-    .vertex-grid {
-        grid-template-columns: repeat(3,1fr);
-    }
+        .section-title h2 {
+            position: relative;
 
-}
+            display: inline-block;
 
-@media(max-width:650px) {
+            font-size: 30px;
 
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-    }
+            font-weight: 700;
+        }
 
-    .nav-menu {
-        width: 100%;
-        overflow-x: auto;
-    }
+        .section-title h2::after {
+            content: "";
 
-    .nav-menu button {
-        white-space: nowrap;
-    }
+            display: block;
 
-    .grid,
-    .quick-box,
-    .form-grid,
-    .filter-box,
-    .ticket-grid,
-    .edges {
-        grid-template-columns: 1fr;
-    }
+            width: 45px;
+            height: 3px;
 
-    .hero {
-        min-height: 600px;
-    }
+            margin: 7px auto 0;
 
-    .vertex-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
+            border-radius: 10px;
 
-    .ticket-bottom {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
+            background:
+                linear-gradient(
+                    90deg,
+                    #d6ad60,
+                    #f1d58a
+                );
+        }
 
-}
+        .section-title p {
+            color: var(--gray);
 
-</style>
+            margin-top: 10px;
+        }
+
+        /* =========================================
+           COURT CARDS
+        ========================================= */
+
+        .court-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .court-card {
+            background: white;
+
+            border-radius: var(--radius);
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow);
+
+            border: 1px solid #edf1f5;
+
+            transition: .3s;
+        }
+
+        .court-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 18px 45px
+                rgba(7,36,71,.13);
+        }
+
+        .court-image {
+            height: 190px;
+
+            background-size: cover;
+            background-position: center;
+
+            position: relative;
+        }
+
+        .court-badge {
+            position: absolute;
+
+            top: 12px;
+            right: 12px;
+
+            padding: 5px 10px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #0758c9;
+        }
+
+        .court-info {
+            padding: 18px;
+        }
+
+        .court-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .court-location {
+            color: var(--gray);
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+        .court-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            color: var(--primary);
+
+            font-weight: 700;
+        }
+
+        .rating {
+            color: #d59b25;
+
+            font-size: 13px;
+        }
+
+        /* =========================================
+           QUICK FEATURES
+        ========================================= */
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f3ff,
+                    #dffaff
+                );
+        }
+
+        /* =========================================
+           BOOKING PAGE
+        ========================================= */
+
+        .page-header {
+            padding: 55px 0 25px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--gray);
+        }
+
+        .filter-box {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+
+            margin-bottom: 28px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.3fr 1fr 1fr auto;
+
+            gap: 12px;
+        }
+
+        .input,
+        .select {
+            width: 100%;
+
+            border: 1px solid #dce5ef;
+
+            border-radius: 11px;
+
+            padding: 11px 13px;
+
+            outline: none;
+
+            background: #fff;
+        }
+
+        .input:focus,
+        .select:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(22,119,255,.1);
+        }
+
+        /* =========================================
+           TRAINING PAGE
+        ========================================= */
+
+        .training-layout {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1.4fr;
+
+            gap: 25px;
+        }
+
+        .panel {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+        }
+
+        .panel h3 {
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            color: #475569;
+
+            margin-bottom: 6px;
+        }
+
+        .training-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .training-item {
+            padding: 16px;
+
+            border-radius: 14px;
+
+            background: #f5f9ff;
+
+            border-left: 4px solid var(--primary);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .training-item small {
+            color: var(--gray);
+        }
+
+        /* =========================================
+           TICKET PAGE
+        ========================================= */
+
+        .ticket-wrapper {
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+        .ticket {
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a33,
+                    #0b3972
+                );
+
+            color: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 50px
+                rgba(7,36,71,.22);
+
+            position: relative;
+        }
+
+        .ticket::before {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            right: -90px;
+            top: -100px;
+        }
+
+        .ticket-header {
+            padding: 25px 28px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom:
+                1px dashed
+                rgba(255,255,255,.25);
+        }
+
+        .ticket-logo {
+            font-family: "Montserrat";
+
+            font-size: 23px;
+
+            font-weight: 800;
+        }
+
+        .ticket-status {
+            background: #19c37d;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+        }
+
+        .ticket-body {
+            padding: 28px;
+        }
+
+        .ticket-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .ticket-info label {
+            display: block;
+
+            color: #a9c2df;
+
+            font-size: 12px;
+
+            margin-bottom: 4px;
+        }
+
+        .ticket-info strong {
+            font-size: 16px;
+        }
+
+        .ticket-footer {
+            padding: 18px 28px;
+
+            border-top:
+                1px dashed
+                rgba(255,255,255,.25);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        /* =========================================
+           THEORY CARDS
+        ========================================= */
+
+        .theory-section {
+            margin-top: 35px;
+        }
+
+        .theory-title {
+            margin-bottom: 15px;
+        }
+
+        .theory-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .theory-card {
+            background: white;
+
+            border-radius: var(--radius);
+
+            padding: 24px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .theory-card h3 {
+            margin-bottom: 15px;
+
+            color: var(--luxury-navy);
+        }
+
+        /* =========================================
+           GRAPH
+        ========================================= */
+
+        .graph-visual {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+        .vertex {
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background: #eaf4ff;
+
+            color: #0758c9;
+
+            border: 1px solid #cfe4ff;
+
+            font-size: 13px;
+        }
+
+        .edge-list {
+            display: grid;
+
+            gap: 8px;
+
+            margin: 15px 0;
+        }
+
+        .edge {
+            padding: 9px 12px;
+
+            border-radius: 9px;
+
+            background: #f7f9fc;
+
+            font-size: 13px;
+        }
+
+        .path-box {
+            padding: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0f8ff,
+                    #f0fdff
+                );
+
+            border-radius: 12px;
+
+            border-left:
+                4px solid
+                var(--primary);
+
+            font-size: 14px;
+        }
+
+        .adjacency-list {
+            background: #081b33;
+
+            color: #d9eeff;
+
+            border-radius: 13px;
+
+            padding: 18px;
+
+            font-family: monospace;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+            overflow-x: auto;
+        }
+
+        /* =========================================
+           TREE
+        ========================================= */
+
+        .tree {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 10px 0 20px;
+        }
+
+        .tree-node {
+            padding: 10px 17px;
+
+            background: #eef6ff;
+
+            border:
+                1px solid
+                #cfe4ff;
+
+            border-radius: 10px;
+
+            color: #0758c9;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .tree-level {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            width: 100%;
+        }
+
+        .tree-connector {
+            width: 2px;
+
+            height: 20px;
+
+            background: #cbd5e1;
+        }
+
+        .tree-legend {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+        .legend {
+            font-size: 12px;
+
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            background: #f1f5f9;
+        }
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(2, 15, 31, .65);
+
+            backdrop-filter:
+                blur(5px);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 2000;
+
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.25);
+
+            animation:
+                modalIn .25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.94);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .close {
+            border: none;
+
+            background: #f1f5f9;
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            font-size: 18px;
+        }
+
+        /* =========================================
+           TOAST
+        ========================================= */
+
+        .toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            background: #0b2447;
+
+            color: white;
+
+            padding: 13px 18px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.2);
+
+            transform:
+                translateY(100px);
+
+            opacity: 0;
+
+            transition: .3s;
+
+            z-index: 3000;
+
+            font-size: 14px;
+        }
+
+        .toast.show {
+            transform:
+                translateY(0);
+
+            opacity: 1;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            margin-top: 50px;
+
+            padding: 35px 0;
+
+            background: #071a33;
+
+            color: #b9c9dc;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .court-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .training-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-box {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 12px 5%;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                overflow-x: auto;
+
+                justify-content: flex-start;
+            }
+
+            .nav-links button {
+                white-space: nowrap;
+            }
+
+            .hero {
+                min-height: 520px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .court-grid,
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-box {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-footer {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<!-- =========================
-     NAVBAR
-========================= -->
 
-<header class="navbar">
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar">
 
     <div class="logo" onclick="showPage('home')">
 
-        <div class="logo-icon">
-            ⚽
+        <div class="logo-mark">
+
+            <svg
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="46"
+                    fill="url(#logoGradient)"
+                />
+
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="38"
+                    fill="none"
+                    stroke="#D6AD60"
+                    stroke-width="2"
+                />
+
+                <!-- ลูกบอล -->
+
+                <circle
+                    cx="63"
+                    cy="35"
+                    r="12"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                />
+
+                <path
+                    d="M63 23 L58 30 L60 38 L68 40 L74 34"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                />
+
+                <!-- นักกีฬา -->
+
+                <circle
+                    cx="38"
+                    cy="30"
+                    r="6"
+                    fill="white"
+                />
+
+                <path
+                    d="M38 37
+                       L32 53
+                       L42 55
+                       L49 43"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+                <path
+                    d="M34 52 L24 67"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    d="M42 54 L54 68"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                />
+
+                <!-- เส้นพลัง -->
+
+                <path
+                    d="M20 76 Q50 90 80 72"
+                    fill="none"
+                    stroke="#D6AD60"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                />
+
+                <defs>
+
+                    <linearGradient
+                        id="logoGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                    >
+
+                        <stop
+                            offset="0%"
+                            stop-color="#0B2447"
+                        />
+
+                        <stop
+                            offset="55%"
+                            stop-color="#0758C9"
+                        />
+
+                        <stop
+                            offset="100%"
+                            stop-color="#00AEEF"
+                        />
+
+                    </linearGradient>
+
+                </defs>
+
+            </svg>
+
         </div>
 
-        <span>SportBook</span>
+
+        <div class="logo-text">
+
+            <span class="logo-main">
+                Sport
+            </span>
+
+            <span class="logo-accent">
+                Book
+            </span>
+
+            <small>
+                PLAY • TRAIN • CONNECT
+            </small>
+
+        </div>
 
     </div>
 
-    <nav class="nav-menu">
 
-        <button onclick="showPage('home')" id="nav-home" class="active">
-            หน้าหลัก
+    <div class="nav-links">
+
+        <button
+            class="active"
+            onclick="showPage('home')"
+            id="nav-home"
+        >
+            🏠 หน้าหลัก
         </button>
 
-        <button onclick="showPage('booking')" id="nav-booking">
-            🏟️ จองสนาม
+        <button
+            onclick="showPage('booking')"
+            id="nav-booking"
+        >
+            📅 จองสนาม
         </button>
 
-        <button onclick="showPage('training')" id="nav-training">
+        <button
+            onclick="showPage('training')"
+            id="nav-training"
+        >
             🏃 วางแผนการซ้อม
         </button>
 
-        <button onclick="showPage('ticket')" id="nav-ticket">
+        <button
+            onclick="showPage('ticket')"
+            id="nav-ticket"
+        >
             🎟️ ตั๋วการจอง
         </button>
 
-    </nav>
+    </div>
 
-</header>
+</nav>
 
 
-<!-- =========================
+<main>
+
+
+<!-- =========================================
      PAGE 1 : HOME
-========================= -->
+========================================= -->
 
-<section id="home" class="page active">
+<section
+    id="home"
+    class="page active"
+>
 
     <div class="hero">
 
@@ -915,26 +1519,40 @@ footer {
 
             <div class="hero-content">
 
-                <div class="hero-badge">
-                    ⚡ Smart Sports Booking
-                </div>
+                <span class="hero-badge">
+                    ✦ Smart Sports Booking Platform
+                </span>
 
                 <h1>
-                    Book Your Game.<br>
-                    <span>Plan Your Victory.</span>
+                    PLAY.
+                    <span>TRAIN.</span>
+                    CONNECT.
                 </h1>
 
                 <p>
-                    จองสนามกีฬา วางแผนการซ้อม
-                    และจัดการการจองของคุณได้ง่ายในที่เดียว
+                    SportBook ระบบจองสนามกีฬา
+                    และวางแผนการซ้อมสำหรับนักศึกษา
+                    ให้การออกกำลังกายของคุณง่ายขึ้น
+                    เป็นระบบมากขึ้น และสนุกยิ่งขึ้น
                 </p>
 
-                <button
-                    class="btn btn-primary"
-                    onclick="showPage('booking')"
-                >
-                    จองสนามตอนนี้ →
-                </button>
+                <div class="hero-buttons">
+
+                    <button
+                        class="btn btn-white"
+                        onclick="showPage('booking')"
+                    >
+                        📅 จองสนามทันที
+                    </button>
+
+                    <button
+                        class="btn btn-gold"
+                        onclick="showPage('training')"
+                    >
+                        🏃 วางแผนการซ้อม
+                    </button>
+
+                </div>
 
             </div>
 
@@ -943,244 +1561,280 @@ footer {
     </div>
 
 
-    <div class="container quick-menu">
+    <!-- Popular Courts -->
 
-        <div class="quick-box">
+    <section class="section">
 
-            <div class="quick-item">
+        <div class="container">
 
-                <span>🏟️</span>
+            <div class="section-title">
 
-                <h3>จองสนาม</h3>
+                <h2>
+                    สนามกีฬายอดนิยม
+                </h2>
 
                 <p>
-                    ค้นหาและจองสนามกีฬาที่ต้องการ
+                    เลือกสนามที่เหมาะกับกิจกรรมของคุณ
                 </p>
 
             </div>
 
-            <div class="quick-item">
 
-                <span>📅</span>
+            <div
+                class="court-grid"
+                id="homeCourts"
+            ></div>
 
-                <h3>วางแผนการซ้อม</h3>
+        </div>
 
-                <p>
-                    สร้างตารางฝึกซ้อมให้เป็นระบบ
-                </p>
+    </section>
+
+
+    <!-- Features -->
+
+    <section
+        class="section"
+        style="background:#eef5fb;"
+    >
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    ทำไมต้อง SportBook?
+                </h2>
 
             </div>
 
-            <div class="quick-item">
 
-                <span>🎟️</span>
+            <div class="feature-grid">
 
-                <h3>ตั๋วการจอง</h3>
+                <div class="feature-card">
 
-                <p>
-                    ตรวจสอบข้อมูลการจองของคุณ
-                </p>
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        จองสนามง่าย
+                    </h3>
+
+                    <p>
+                        ค้นหาและจองสนาม
+                        ได้อย่างรวดเร็ว
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🏃
+                    </div>
+
+                    <h3>
+                        วางแผนการซ้อม
+                    </h3>
+
+                    <p>
+                        สร้างตารางฝึกซ้อม
+                        ให้เหมาะกับตัวเอง
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🎟️
+                    </div>
+
+                    <h3>
+                        ตั๋วการจอง
+                    </h3>
+
+                    <p>
+                        ตรวจสอบรายละเอียด
+                        การจองได้ในที่เดียว
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    </section>
+
+</section>
 
 
-    <div class="container section">
 
-        <div class="section-title">
+<!-- =========================================
+     PAGE 2 : BOOKING
+========================================= -->
 
-            <h2>สนามยอดนิยม</h2>
+<section
+    id="booking"
+    class="page"
+>
+
+    <div class="container">
+
+        <div class="page-header">
+
+            <h1>
+                📅 จองสนามกีฬา
+            </h1>
 
             <p>
-                สนามที่ได้รับความนิยมจากนักศึกษา
+                ค้นหาสนามที่ต้องการและเลือกเวลาที่เหมาะสม
             </p>
 
         </div>
 
 
-        <div class="grid">
-
-            <div class="card">
-
-                <img
-                    class="card-image"
-                    src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=85"
-                >
-
-                <div class="card-body">
-
-                    <h3>สนามฟุตบอล A</h3>
-
-                    <p>ฟุตบอล • สนามมาตรฐาน</p>
-
-                    <div class="price">
-                        ฿800 / ชั่วโมง
-                    </div>
-
-                    <div class="rating">
-                        ★ 4.9
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <img
-                    class="card-image"
-                    src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=900&q=85"
-                >
-
-                <div class="card-body">
-
-                    <h3>สนามบาสเกตบอล B</h3>
-
-                    <p>บาสเกตบอล • Indoor</p>
-
-                    <div class="price">
-                        ฿400 / ชั่วโมง
-                    </div>
-
-                    <div class="rating">
-                        ★ 4.8
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <img
-                    class="card-image"
-                    src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=85"
-                >
-
-                <div class="card-body">
-
-                    <h3>สนามแบดมินตัน C</h3>
-
-                    <p>แบดมินตัน • 4 สนาม</p>
-
-                    <div class="price">
-                        ฿150 / ชั่วโมง
-                    </div>
-
-                    <div class="rating">
-                        ★ 4.7
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 2 : BOOKING
-========================= -->
-
-<section id="booking" class="page">
-
-    <div class="container">
-
-        <div class="booking-header">
-
-            <div class="section-title">
-
-                <h2>🏟️ จองสนามกีฬา</h2>
-
-                <p>
-                    เลือกสนามที่เหมาะกับการเล่นของคุณ
-                </p>
-
-            </div>
-
-        </div>
-
+        <!-- Filter -->
 
         <div class="filter-box">
 
             <input
-                id="searchInput"
                 class="input"
-                placeholder="🔍 ค้นหาชื่อสนาม..."
-                oninput="renderCourts()"
+                id="searchInput"
+                type="text"
+                placeholder="🔍 ค้นหาสนาม..."
+                oninput="filterCourts()"
             >
+
 
             <select
+                class="select"
                 id="sportFilter"
-                class="input"
-                onchange="renderCourts()"
+                onchange="filterCourts()"
             >
 
-                <option value="ทั้งหมด">
+                <option value="">
                     ทุกประเภทกีฬา
                 </option>
 
-                <option>ฟุตบอล</option>
-                <option>บาสเกตบอล</option>
-                <option>แบดมินตัน</option>
-                <option>เทนนิส</option>
-                <option>วอลเลย์บอล</option>
-                <option>ฟุตซอล</option>
+                <option value="ฟุตบอล">
+                    ⚽ ฟุตบอล
+                </option>
+
+                <option value="บาสเกตบอล">
+                    🏀 บาสเกตบอล
+                </option>
+
+                <option value="แบดมินตัน">
+                    🏸 แบดมินตัน
+                </option>
+
+                <option value="เทนนิส">
+                    🎾 เทนนิส
+                </option>
+
+                <option value="วอลเลย์บอล">
+                    🏐 วอลเลย์บอล
+                </option>
+
+                <option value="ฟุตซอล">
+                    ⚽ ฟุตซอล
+                </option>
 
             </select>
+
+
+            <select
+                class="select"
+                id="priceFilter"
+                onchange="filterCourts()"
+            >
+
+                <option value="">
+                    ทุกช่วงราคา
+                </option>
+
+                <option value="low">
+                    ต่ำกว่า 300 บาท
+                </option>
+
+                <option value="high">
+                    300 บาทขึ้นไป
+                </option>
+
+            </select>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="filterCourts()"
+            >
+                ค้นหา
+            </button>
 
         </div>
 
 
-        <div id="courtList" class="grid"></div>
+        <div
+            class="court-grid"
+            id="bookingCourts"
+        ></div>
 
     </div>
 
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================
      PAGE 3 : TRAINING
-========================= -->
+========================================= -->
 
-<section id="training" class="page">
+<section
+    id="training"
+    class="page"
+>
 
-    <div class="container section">
+    <div class="container">
 
-        <div class="section-title">
+        <div class="page-header">
 
-            <h2>🏃 วางแผนการซ้อม</h2>
+            <h1>
+                🏃 วางแผนการซ้อม
+            </h1>
 
             <p>
-                สร้างตารางการฝึกซ้อมของคุณ
+                สร้างตารางฝึกซ้อมให้เหมาะกับเป้าหมายของคุณ
             </p>
 
         </div>
 
 
-        <div class="form-card">
+        <div class="training-layout">
 
-            <div class="form-grid">
+
+            <!-- Create Plan -->
+
+            <div class="panel">
+
+                <h3>
+                    ✦ สร้างแผนการซ้อม
+                </h3>
+
 
                 <div class="form-group">
 
                     <label>
-                        เป้าหมาย
+                        ชื่อแผน
                     </label>
 
                     <input
-                        id="goal"
                         class="input"
-                        placeholder="เช่น เตรียมแข่งฟุตบอล"
+                        id="planName"
+                        placeholder="เช่น ฝึกฟุตบอลประจำสัปดาห์"
                     >
 
                 </div>
@@ -1192,14 +1846,34 @@ footer {
                         ประเภทกีฬา
                     </label>
 
-                    <select id="trainingSport" class="input">
+                    <select
+                        class="select"
+                        id="trainingSport"
+                    >
 
-                        <option>ฟุตบอล</option>
-                        <option>บาสเกตบอล</option>
-                        <option>แบดมินตัน</option>
-                        <option>เทนนิส</option>
-                        <option>วอลเลย์บอล</option>
-                        <option>ฟุตซอล</option>
+                        <option>
+                            ฟุตบอล
+                        </option>
+
+                        <option>
+                            บาสเกตบอล
+                        </option>
+
+                        <option>
+                            แบดมินตัน
+                        </option>
+
+                        <option>
+                            เทนนิส
+                        </option>
+
+                        <option>
+                            วอลเลย์บอล
+                        </option>
+
+                        <option>
+                            ฟุตซอล
+                        </option>
 
                     </select>
 
@@ -1212,15 +1886,38 @@ footer {
                         วัน
                     </label>
 
-                    <select id="trainingDay" class="input">
+                    <select
+                        class="select"
+                        id="trainingDay"
+                    >
 
-                        <option>จันทร์</option>
-                        <option>อังคาร</option>
-                        <option>พุธ</option>
-                        <option>พฤหัสบดี</option>
-                        <option>ศุกร์</option>
-                        <option>เสาร์</option>
-                        <option>อาทิตย์</option>
+                        <option>
+                            จันทร์
+                        </option>
+
+                        <option>
+                            อังคาร
+                        </option>
+
+                        <option>
+                            พุธ
+                        </option>
+
+                        <option>
+                            พฤหัสบดี
+                        </option>
+
+                        <option>
+                            ศุกร์
+                        </option>
+
+                        <option>
+                            เสาร์
+                        </option>
+
+                        <option>
+                            อาทิตย์
+                        </option>
 
                     </select>
 
@@ -1234,539 +1931,66 @@ footer {
                     </label>
 
                     <input
+                        class="input"
                         id="trainingTime"
                         type="time"
-                        class="input"
                         value="17:00"
                     >
 
                 </div>
 
-            </div>
 
+                <div class="form-group">
 
-            <br>
+                    <label>
+                        ระยะเวลาการซ้อม
+                    </label>
 
-            <button
-                class="btn btn-primary"
-                onclick="createPlan()"
-            >
-                + เพิ่มแผนการซ้อม
-            </button>
+                    <select
+                        class="select"
+                        id="trainingDuration"
+                    >
 
-        </div>
+                        <option>
+                            60 นาที
+                        </option>
 
+                        <option>
+                            90 นาที
+                        </option>
 
-        <div class="section-title">
+                        <option>
+                            120 นาที
+                        </option>
 
-            <h2>ตารางการซ้อมของฉัน</h2>
-
-        </div>
-
-
-        <div id="trainingList" class="training-list">
-
-            <div class="training-item">
-
-                <div>
-
-                    <strong>
-                        ฝึกพื้นฐานฟุตบอล
-                    </strong>
-
-                    <p>
-                        ฟุตบอล • จันทร์ • 17:00 น.
-                    </p>
-
-                </div>
-
-                <span>
-                    🏃
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     PAGE 4 : TICKET
-========================= -->
-
-<section id="ticket" class="page">
-
-    <div class="container ticket-page">
-
-        <div class="section-title">
-
-            <h2>🎟️ ตั๋วการจองของฉัน</h2>
-
-            <p>
-                ตรวจสอบรายละเอียดการจองและโครงสร้างข้อมูล
-            </p>
-
-        </div>
-
-
-        <!-- TICKET -->
-
-        <div class="ticket">
-
-            <div class="ticket-top">
-
-                <div>
-
-                    <h2>
-                        SportBook
-                    </h2>
-
-                    <div class="ticket-id" id="ticketId">
-                        Booking ID: SB-2026-001
-                    </div>
-
-                </div>
-
-                <div class="status">
-                    ✓ ยืนยันแล้ว
-                </div>
-
-            </div>
-
-
-            <div class="ticket-body">
-
-                <div class="ticket-grid">
-
-                    <div class="ticket-info">
-
-                        <small>กีฬา</small>
-
-                        <strong id="ticketSport">
-                            ฟุตบอล
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-info">
-
-                        <small>สนาม</small>
-
-                        <strong id="ticketVenue">
-                            Sport Arena
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-info">
-
-                        <small>วันที่</small>
-
-                        <strong id="ticketDate">
-                            25/09/2026
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-info">
-
-                        <small>เวลา</small>
-
-                        <strong id="ticketTime">
-                            17:00 - 18:00
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-info">
-
-                        <small>สนามย่อย</small>
-
-                        <strong id="ticketCourt">
-                            สนาม A
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-info">
-
-                        <small>สถานะ</small>
-
-                        <strong>
-                            พร้อมใช้งาน
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="ticket-bottom">
-
-                <div>
-
-                    <small>
-                        ราคาการจอง
-                    </small>
-
-                    <div class="ticket-price" id="ticketPrice">
-                        ฿800
-                    </div>
+                    </select>
 
                 </div>
 
 
                 <button
                     class="btn btn-primary"
-                    onclick="printTicket()"
+                    style="width:100%;"
+                    onclick="addTraining()"
                 >
-                    🖨️ พิมพ์ตั๋ว
+                    + เพิ่มตารางซ้อม
                 </button>
 
             </div>
 
-        </div>
 
+            <!-- Training Schedule -->
 
-        <!-- =========================
-             GRAPH THEORY
-        ========================= -->
-
-        <div class="theory-section">
-
-            <div class="section-title">
-
-                <h2>🔵 Graph Structure</h2>
-
-                <p>
-                    โครงสร้าง Graph ที่ใช้ในระบบ SportBook
-                </p>
-
-            </div>
-
-
-            <div class="theory-card">
+            <div class="panel">
 
                 <h3>
-                    1. Vertex
+                    📋 ตารางการซ้อมของฉัน
                 </h3>
 
-                <p>
-                    ระบบกำหนดประเภทกีฬาเป็น Vertex จำนวน 6 จุด
-                </p>
-
-
-                <div class="vertex-grid">
-
-                    <div class="vertex">
-                        ฟุตบอล
-                    </div>
-
-                    <div class="vertex">
-                        บาสเกตบอล
-                    </div>
-
-                    <div class="vertex">
-                        แบดมินตัน
-                    </div>
-
-                    <div class="vertex">
-                        เทนนิส
-                    </div>
-
-                    <div class="vertex">
-                        วอลเลย์บอล
-                    </div>
-
-                    <div class="vertex">
-                        ฟุตซอล
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="theory-card">
-
-                <h3>
-                    2. Edge
-                </h3>
-
-                <p>
-                    ความสัมพันธ์ระหว่าง Vertex มีทั้งหมด 8 เส้น
-                </p>
-
-                <br>
-
-                <div class="edges">
-
-                    <div class="edge">
-                        1. ฟุตบอล ↔ บาสเกตบอล
-                    </div>
-
-                    <div class="edge">
-                        2. ฟุตบอล ↔ แบดมินตัน
-                    </div>
-
-                    <div class="edge">
-                        3. ฟุตบอล ↔ วอลเลย์บอล
-                    </div>
-
-                    <div class="edge">
-                        4. บาสเกตบอล ↔ แบดมินตัน
-                    </div>
-
-                    <div class="edge">
-                        5. บาสเกตบอล ↔ เทนนิส
-                    </div>
-
-                    <div class="edge">
-                        6. แบดมินตัน ↔ เทนนิส
-                    </div>
-
-                    <div class="edge">
-                        7. เทนนิส ↔ วอลเลย์บอล
-                    </div>
-
-                    <div class="edge">
-                        8. วอลเลย์บอล ↔ ฟุตซอล
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ADJACENCY LIST -->
-
-            <div class="theory-card">
-
-                <h3>
-                    3. Adjacency List
-                </h3>
-
-                <p>
-                    รายการ Vertex ที่เชื่อมต่อกันใน Graph
-                </p>
-
-                <br>
-
-                <div class="adjacency" id="adjacencyList"></div>
-
-            </div>
-
-
-            <!-- PATH -->
-
-            <div class="theory-card">
-
-                <h3>
-                    4. ตัวอย่าง Path
-                </h3>
-
-                <p>
-                    ตัวอย่างการเดินจากกีฬาเริ่มต้นไปยังอีกกีฬา
-                </p>
-
-                <br>
-
-                <div class="path-box">
-
-                    ฟุตบอล
-                    →
-                    บาสเกตบอล
-                    →
-                    เทนนิส
-
-                    <br>
-
-                    <small>
-                        ความหมาย:
-                        สามารถเดินจาก Vertex ฟุตบอล
-                        ไปยังเทนนิสผ่านบาสเกตบอล
-                    </small>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             TREE
-        ========================= -->
-
-        <div class="theory-section">
-
-            <div class="section-title">
-
-                <h2>🌳 Tree Structure</h2>
-
-                <p>
-                    โครงสร้าง Tree สำหรับจัดลำดับข้อมูลการจองสนาม
-                </p>
-
-            </div>
-
-
-            <div class="theory-card">
-
-                <h3>
-                    โครงสร้าง Tree
-                </h3>
-
-                <br>
-
-
-                <div class="tree">
-
-                    <ul>
-
-                        <li>
-
-                            <span class="tree-node root">
-                                Root: การจองสนาม
-                            </span>
-
-                            <ul>
-
-                                <li>
-
-                                    <span class="tree-node parent">
-                                        Parent: ประเภทกีฬา
-                                    </span>
-
-                                    <ul>
-
-                                        <li>
-
-                                            <span class="tree-node child">
-                                                Child: ฟุตบอล
-                                            </span>
-
-                                            <ul>
-
-                                                <li>
-                                                    <span class="tree-node leaf">
-                                                        Leaf: สนาม A
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span class="tree-node leaf">
-                                                        Leaf: สนาม B
-                                                    </span>
-                                                </li>
-
-                                            </ul>
-
-                                        </li>
-
-
-                                        <li>
-
-                                            <span class="tree-node child">
-                                                Child: บาสเกตบอล
-                                            </span>
-
-                                            <ul>
-
-                                                <li>
-                                                    <span class="tree-node leaf">
-                                                        Leaf: สนาม C
-                                                    </span>
-                                                </li>
-
-                                            </ul>
-
-                                        </li>
-
-
-                                        <li>
-
-                                            <span class="tree-node child">
-                                                Child: แบดมินตัน
-                                            </span>
-
-                                            <ul>
-
-                                                <li>
-                                                    <span class="tree-node leaf">
-                                                        Leaf: สนาม D
-                                                    </span>
-                                                </li>
-
-                                            </ul>
-
-                                        </li>
-
-                                    </ul>
-
-                                </li>
-
-                            </ul>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-
-            <!-- TREE PATH -->
-
-            <div class="theory-card">
-
-                <h3>
-                    5. Tree Path
-                </h3>
-
-                <br>
-
-                <div class="path-box">
-
-                    การจองสนาม
-                    →
-                    ประเภทกีฬา
-                    →
-                    ฟุตบอล
-                    →
-                    สนาม A
-
-                </div>
-
-            </div>
-
-
-            <!-- BFS -->
-
-            <div class="theory-card">
-
-                <h3>
-                    6. BFS (Breadth-First Search)
-                </h3>
-
-                <p>
-                    การท่อง Tree แบบค้นหาทีละระดับ
-                </p>
-
-                <br>
-
-                <div class="bfs-box" id="bfsResult"></div>
+                <div
+                    class="training-list"
+                    id="trainingList"
+                ></div>
 
             </div>
 
@@ -1777,19 +2001,479 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================
+     PAGE 4 : TICKET + GRAPH + TREE
+========================================= -->
+
+<section
+    id="ticket"
+    class="page"
+>
+
+    <div class="container">
+
+        <div class="page-header">
+
+            <h1>
+                🎟️ ตั๋วการจองของฉัน
+            </h1>
+
+            <p>
+                รายละเอียดการจองสนามกีฬา
+                พร้อมโครงสร้างข้อมูล Graph และ Tree
+            </p>
+
+        </div>
+
+
+        <div class="ticket-wrapper">
+
+
+            <!-- Ticket -->
+
+            <div class="ticket">
+
+                <div class="ticket-header">
+
+                    <div class="ticket-logo">
+                        SportBook
+                    </div>
+
+                    <span
+                        class="ticket-status"
+                        id="ticketStatus"
+                    >
+                        ✓ ยืนยันแล้ว
+                    </span>
+
+                </div>
+
+
+                <div class="ticket-body">
+
+                    <div class="ticket-grid">
+
+                        <div class="ticket-info">
+
+                            <label>
+                                Booking ID
+                            </label>
+
+                            <strong id="ticketId">
+                                SB-2026-001
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-info">
+
+                            <label>
+                                กีฬา
+                            </label>
+
+                            <strong id="ticketSport">
+                                ฟุตบอล
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-info">
+
+                            <label>
+                                สนาม
+                            </label>
+
+                            <strong id="ticketCourt">
+                                สนามฟุตบอล A
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-info">
+
+                            <label>
+                                วันที่
+                            </label>
+
+                            <strong id="ticketDate">
+                                25/09/2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-info">
+
+                            <label>
+                                เวลา
+                            </label>
+
+                            <strong id="ticketTime">
+                                17:00 - 18:00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-info">
+
+                            <label>
+                                ราคา
+                            </label>
+
+                            <strong id="ticketPrice">
+                                ฿250
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-footer">
+
+                    <span>
+                        ขอบคุณที่ใช้บริการ SportBook
+                    </span>
+
+                    <button
+                        class="btn btn-gold"
+                        onclick="printTicket()"
+                    >
+                        🖨️ พิมพ์ตั๋ว
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- GRAPH -->
+
+            <div class="theory-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Graph Structure
+                    </h2>
+
+                    <p>
+                        โครงสร้างความสัมพันธ์ของประเภทกีฬา
+                    </p>
+
+                </div>
+
+
+                <div class="theory-grid">
+
+
+                    <div class="theory-card">
+
+                        <h3>
+                            🔵 Vertices
+                        </h3>
+
+                        <p style="margin-bottom:15px;">
+                            กำหนดให้ประเภทกีฬาเป็นจุดยอด
+                            จำนวน 6 จุด
+                        </p>
+
+
+                        <div
+                            class="graph-visual"
+                            id="vertices"
+                        ></div>
+
+
+                        <h3 style="margin-top:20px;">
+                            🔗 Edges
+                        </h3>
+
+                        <div
+                            class="edge-list"
+                            id="edges"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="theory-card">
+
+                        <h3>
+                            📋 Adjacency List
+                        </h3>
+
+                        <div
+                            class="adjacency-list"
+                            id="adjacencyList"
+                        ></div>
+
+
+                        <h3 style="margin-top:20px;">
+                            🛣️ Example Path
+                        </h3>
+
+                        <div class="path-box">
+
+                            ฟุตบอล
+                            →
+                            บาสเกตบอล
+                            →
+                            เทนนิส
+
+                            <br><br>
+
+                            <small>
+                                ความหมาย:
+                                สามารถเชื่อมโยงจากประเภทกีฬา
+                                ฟุตบอลไปยังบาสเกตบอล
+                                และต่อไปยังเทนนิส
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TREE -->
+
+            <div class="theory-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Tree Structure
+                    </h2>
+
+                    <p>
+                        โครงสร้างลำดับชั้นของข้อมูลการจอง
+                    </p>
+
+                </div>
+
+
+                <div class="theory-card">
+
+                    <div class="tree">
+
+
+                        <!-- Level 1 -->
+
+                        <div class="tree-level">
+
+                            <div class="tree-node">
+                                Root: การจองสนาม
+                            </div>
+
+                        </div>
+
+
+                        <div class="tree-connector"></div>
+
+
+                        <!-- Level 2 -->
+
+                        <div class="tree-level">
+
+                            <div class="tree-node">
+                                Parent:
+                                ประเภทกีฬา
+                            </div>
+
+                        </div>
+
+
+                        <div class="tree-connector"></div>
+
+
+                        <!-- Level 3 -->
+
+                        <div class="tree-level">
+
+                            <div class="tree-node">
+                                Child: ฟุตบอล
+                            </div>
+
+                            <div class="tree-node">
+                                Child: บาสเกตบอล
+                            </div>
+
+                            <div class="tree-node">
+                                Child: แบดมินตัน
+                            </div>
+
+                        </div>
+
+
+                        <div class="tree-connector"></div>
+
+
+                        <!-- Level 4 -->
+
+                        <div class="tree-level">
+
+                            <div class="tree-node">
+                                Leaf: สนาม A
+                            </div>
+
+                            <div class="tree-node">
+                                Leaf: สนาม B
+                            </div>
+
+                            <div class="tree-node">
+                                Leaf: สนาม C
+                            </div>
+
+                            <div class="tree-node">
+                                Leaf: สนาม D
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tree-legend">
+
+                        <span class="legend">
+                            🌳 Root = การจองสนาม
+                        </span>
+
+                        <span class="legend">
+                            📁 Parent = ประเภทกีฬา
+                        </span>
+
+                        <span class="legend">
+                            🔵 Child = กีฬา
+                        </span>
+
+                        <span class="legend">
+                            🟢 Leaf = สนาม
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="path-box"
+                        style="margin-top:20px;"
+                    >
+
+                        <strong>
+                            Tree Path:
+                        </strong>
+
+                        การจองสนาม
+                        →
+                        ประเภทกีฬา
+                        →
+                        ฟุตบอล
+                        →
+                        สนาม A
+
+                    </div>
+
+
+                    <div
+                        class="path-box"
+                        style="margin-top:12px;"
+                    >
+
+                        <strong>
+                            BFS:
+                        </strong>
+
+                        <span id="bfsResult">
+                            การจองสนาม
+                            →
+                            ประเภทกีฬา
+                            →
+                            ฟุตบอล
+                            →
+                            บาสเกตบอล
+                            →
+                            แบดมินตัน
+                            →
+                            สนาม A
+                            →
+                            สนาม B
+                            →
+                            สนาม C
+                            →
+                            สนาม D
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <strong>
+            SportBook
+        </strong>
+
+        <br>
+
+        Smart Sports Booking &
+        Training Planner
+
+        <br><br>
+
+        © 2026 SportBook
+        | Interactive Web Application
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================
      BOOKING MODAL
-========================= -->
+========================================= -->
 
-<div id="bookingModal" class="modal">
+<div
+    class="modal"
+    id="bookingModal"
+>
 
-    <div class="modal-content">
+    <div class="modal-box">
 
         <div class="modal-header">
 
-            <h2>
-                จองสนาม
-            </h2>
+            <h3>
+                📅 จองสนาม
+            </h3>
 
             <button
                 class="close"
@@ -1801,866 +2485,1375 @@ footer {
         </div>
 
 
-        <div class="modal-form">
+        <div class="form-group">
 
-            <div>
+            <label>
+                สนาม
+            </label>
 
-                <label>
-                    สนาม
-                </label>
-
-                <input
-                    id="modalVenue"
-                    class="input"
-                    readonly
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    ประเภทกีฬา
-                </label>
-
-                <input
-                    id="modalSport"
-                    class="input"
-                    readonly
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    วันที่
-                </label>
-
-                <input
-                    id="modalDate"
-                    type="date"
-                    class="input"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    เวลา
-                </label>
-
-                <input
-                    id="modalTime"
-                    type="time"
-                    class="input"
-                    value="17:00"
-                >
-
-            </div>
-
-
-            <button
-                class="btn btn-primary"
-                onclick="confirmBooking()"
+            <input
+                class="input"
+                id="modalCourt"
+                readonly
             >
-                ✓ ยืนยันการจอง
-            </button>
 
         </div>
+
+
+        <div class="form-group">
+
+            <label>
+                วันที่
+            </label>
+
+            <input
+                class="input"
+                id="modalDate"
+                type="date"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                เวลา
+            </label>
+
+            <select
+                class="select"
+                id="modalTime"
+            >
+
+                <option>
+                    08:00 - 09:00
+                </option>
+
+                <option>
+                    10:00 - 11:00
+                </option>
+
+                <option>
+                    13:00 - 14:00
+                </option>
+
+                <option>
+                    15:00 - 16:00
+                </option>
+
+                <option>
+                    17:00 - 18:00
+                </option>
+
+                <option>
+                    19:00 - 20:00
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn btn-primary"
+            style="width:100%;"
+            onclick="confirmBooking()"
+        >
+            ✓ ยืนยันการจอง
+        </button>
 
     </div>
 
 </div>
 
 
-<!-- =========================
+
+<!-- =========================================
      TOAST
-========================= -->
+========================================= -->
 
-<div id="toast" class="toast"></div>
+<div
+    class="toast"
+    id="toast"
+>
+    บันทึกเรียบร้อยแล้ว ✓
+</div>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <strong>SportBook</strong>
-
-    <br>
-
-    ระบบจองสนามกีฬาและวางแผนการซ้อม
-
-    <br>
-
-    <small>
-        Interactive Web Application
-    </small>
-
-</footer>
 
 
 <script>
 
-/* =====================================================
-   PAGE SYSTEM
-===================================================== */
+    /* =========================================
+       COURT DATA
+    ========================================= */
 
-function showPage(pageId) {
+    const courts = [
 
-    document.querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.remove("active");
+        {
+            id: 1,
+            name: "สนามฟุตบอล A",
+            sport: "ฟุตบอล",
+            location: "สนามกีฬา SportBook",
+            price: 250,
+            rating: 4.9,
+            image:
+            "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 2,
+            name: "สนามบาสเกตบอล Pro",
+            sport: "บาสเกตบอล",
+            location: "SportBook Arena",
+            price: 300,
+            rating: 4.8,
+            image:
+            "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 3,
+            name: "สนามแบดมินตัน B1",
+            sport: "แบดมินตัน",
+            location: "SportBook Indoor",
+            price: 180,
+            rating: 4.7,
+            image:
+            "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 4,
+            name: "สนามเทนนิส Premium",
+            sport: "เทนนิส",
+            location: "SportBook Tennis Club",
+            price: 350,
+            rating: 4.9,
+            image:
+            "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 5,
+            name: "สนามวอลเลย์บอล C",
+            sport: "วอลเลย์บอล",
+            location: "SportBook Arena",
+            price: 220,
+            rating: 4.6,
+            image:
+            "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=800&q=80"
+        },
+
+        {
+            id: 6,
+            name: "สนามฟุตซอล Pro",
+            sport: "ฟุตซอล",
+            location: "SportBook Indoor",
+            price: 280,
+            rating: 4.8,
+            image:
+            "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?auto=format&fit=crop&w=800&q=80"
+        }
+
+    ];
+
+
+    /* =========================================
+       SHOW PAGE
+    ========================================= */
+
+    function showPage(pageName) {
+
+        document
+            .querySelectorAll(".page")
+            .forEach(page => {
+                page.classList.remove("active");
+            });
+
+
+        const selectedPage =
+            document.getElementById(pageName);
+
+        if (selectedPage) {
+            selectedPage.classList.add("active");
+        }
+
+
+        document
+            .querySelectorAll(".nav-links button")
+            .forEach(button => {
+                button.classList.remove("active");
+            });
+
+
+        const activeNav =
+            document.getElementById(
+                "nav-" + pageName
+            );
+
+        if (activeNav) {
+            activeNav.classList.add("active");
+        }
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
 
-
-    document.getElementById(pageId)
-        .classList.add("active");
-
-
-    document.querySelectorAll(".nav-menu button")
-        .forEach(button => {
-            button.classList.remove("active");
-        });
-
-
-    const nav = document.getElementById(
-        "nav-" + pageId
-    );
-
-    if (nav) {
-        nav.classList.add("active");
     }
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    /* =========================================
+       COURT CARD
+    ========================================= */
 
-}
+    function courtCard(court) {
 
+        return `
 
-/* =====================================================
-   COURTS DATA
-===================================================== */
+            <div class="court-card">
 
-const courts = [
-
-    {
-        name: "สนามฟุตบอล A",
-        sport: "ฟุตบอล",
-        price: 800,
-        rating: 4.9,
-        image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=85"
-    },
-
-    {
-        name: "สนามบาสเกตบอล B",
-        sport: "บาสเกตบอล",
-        price: 400,
-        rating: 4.8,
-        image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=900&q=85"
-    },
-
-    {
-        name: "สนามแบดมินตัน C",
-        sport: "แบดมินตัน",
-        price: 150,
-        rating: 4.7,
-        image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=85"
-    },
-
-    {
-        name: "สนามเทนนิส D",
-        sport: "เทนนิส",
-        price: 350,
-        rating: 4.8,
-        image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=900&q=85"
-    },
-
-    {
-        name: "สนามวอลเลย์บอล E",
-        sport: "วอลเลย์บอล",
-        price: 500,
-        rating: 4.6,
-        image: "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=900&q=85"
-    },
-
-    {
-        name: "สนามฟุตซอล F",
-        sport: "ฟุตซอล",
-        price: 600,
-        rating: 4.9,
-        image: "https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=900&q=85"
-    }
-
-];
-
-
-/* =====================================================
-   RENDER COURTS
-===================================================== */
-
-function renderCourts() {
-
-    const search =
-        document.getElementById("searchInput")
-            .value
-            .toLowerCase();
-
-
-    const sport =
-        document.getElementById("sportFilter")
-            .value;
-
-
-    const result =
-        courts.filter(court => {
-
-            const matchSearch =
-                court.name
-                    .toLowerCase()
-                    .includes(search);
-
-
-            const matchSport =
-                sport === "ทั้งหมด" ||
-                court.sport === sport;
-
-
-            return matchSearch && matchSport;
-
-        });
-
-
-    const container =
-        document.getElementById("courtList");
-
-
-    if (result.length === 0) {
-
-        container.innerHTML = `
-            <div class="form-card">
-                ไม่พบสนามที่ค้นหา
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
-        result.map(court => `
-
-            <div class="card">
-
-                <img
-                    class="card-image"
-                    src="${court.image}"
+                <div
+                    class="court-image"
+                    style="
+                        background-image:
+                        url('${court.image}');
+                    "
                 >
 
-                <div class="card-body">
+                    <span class="court-badge">
+                        ${court.sport}
+                    </span>
+
+                </div>
+
+
+                <div class="court-info">
 
                     <h3>
                         ${court.name}
                     </h3>
 
-                    <p>
-                        ${court.sport}
-                    </p>
-
-                    <div class="price">
-                        ฿${court.price.toLocaleString()}
-                        / ชั่วโมง
+                    <div class="court-location">
+                        📍 ${court.location}
                     </div>
 
-                    <div class="rating">
-                        ★ ${court.rating}
+
+                    <div class="court-bottom">
+
+                        <div>
+
+                            <div class="price">
+                                ฿${court.price}/ชม.
+                            </div>
+
+                            <div class="rating">
+                                ★ ${court.rating}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="openBooking(${court.id})"
+                        >
+                            จอง
+                        </button>
+
                     </div>
-
-                    <br>
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="openBooking(
-                            '${court.name}',
-                            '${court.sport}',
-                            ${court.price}
-                        )"
-                    >
-                        จองสนาม
-                    </button>
 
                 </div>
 
             </div>
 
-        `).join("");
-
-}
-
-
-/* =====================================================
-   BOOKING MODAL
-===================================================== */
-
-let selectedPrice = 0;
-
-
-function openBooking(
-    venue,
-    sport,
-    price
-) {
-
-    selectedPrice = price;
-
-
-    document.getElementById("modalVenue")
-        .value = venue;
-
-
-    document.getElementById("modalSport")
-        .value = sport;
-
-
-    const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
-
-
-    document.getElementById("modalDate")
-        .value = today;
-
-
-    document.getElementById("bookingModal")
-        .classList.add("show");
-
-}
-
-
-function closeModal() {
-
-    document.getElementById("bookingModal")
-        .classList.remove("show");
-
-}
-
-
-/* =====================================================
-   CONFIRM BOOKING
-===================================================== */
-
-function confirmBooking() {
-
-    const venue =
-        document.getElementById("modalVenue")
-            .value;
-
-
-    const sport =
-        document.getElementById("modalSport")
-            .value;
-
-
-    const date =
-        document.getElementById("modalDate")
-            .value;
-
-
-    const time =
-        document.getElementById("modalTime")
-            .value;
-
-
-    if (!date || !time) {
-
-        showToast(
-            "กรุณาเลือกวันที่และเวลา"
-        );
-
-        return;
+        `;
 
     }
 
 
-    const bookingId =
-        "SB-" +
-        new Date().getFullYear() +
-        "-" +
-        Math.floor(
-            100 + Math.random() * 900
-        );
+    /* =========================================
+       DISPLAY COURTS
+    ========================================= */
 
+    function displayCourts(
+        targetId,
+        data = courts
+    ) {
 
-    document.getElementById("ticketId")
-        .textContent =
-        "Booking ID: " + bookingId;
+        const target =
+            document.getElementById(targetId);
 
+        if (!target) return;
 
-    document.getElementById("ticketSport")
-        .textContent = sport;
-
-
-    document.getElementById("ticketVenue")
-        .textContent = venue;
-
-
-    document.getElementById("ticketDate")
-        .textContent =
-        formatDate(date);
-
-
-    document.getElementById("ticketTime")
-        .textContent =
-        time + " - " + addOneHour(time);
-
-
-    document.getElementById("ticketCourt")
-        .textContent =
-        getCourtName(venue);
-
-
-    document.getElementById("ticketPrice")
-        .textContent =
-        "฿" + selectedPrice.toLocaleString();
-
-
-    closeModal();
-
-
-    showPage("ticket");
-
-
-    showToast(
-        "จองสนามสำเร็จ! 🎉"
-    );
-
-}
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function formatDate(dateString) {
-
-    const parts =
-        dateString.split("-");
-
-
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-
-}
-
-
-function addOneHour(time) {
-
-    let [
-        hour,
-        minute
-    ] =
-        time.split(":")
-            .map(Number);
-
-
-    hour =
-        (hour + 1) % 24;
-
-
-    return String(hour).padStart(2,"0")
-        + ":" +
-        String(minute).padStart(2,"0");
-
-}
-
-
-function getCourtName(venue) {
-
-    const last =
-        venue.split(" ").pop();
-
-    return last;
-
-}
-
-
-/* =====================================================
-   TRAINING PLAN
-===================================================== */
-
-function createPlan() {
-
-    const goal =
-        document.getElementById("goal")
-            .value.trim();
-
-
-    const sport =
-        document.getElementById("trainingSport")
-            .value;
-
-
-    const day =
-        document.getElementById("trainingDay")
-            .value;
-
-
-    const time =
-        document.getElementById("trainingTime")
-            .value;
-
-
-    if (!goal) {
-
-        showToast(
-            "กรุณาระบุเป้าหมายการซ้อม"
-        );
-
-        return;
+        target.innerHTML =
+            data.map(courtCard).join("");
 
     }
 
 
-    const list =
-        document.getElementById(
-            "trainingList"
-        );
+    /* =========================================
+       FILTER
+    ========================================= */
+
+    function filterCourts() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+        const sport =
+            document
+                .getElementById("sportFilter")
+                .value;
+
+        const price =
+            document
+                .getElementById("priceFilter")
+                .value;
 
 
-    const item =
-        document.createElement("div");
+        const filtered =
+            courts.filter(court => {
 
+                const matchSearch =
+                    court.name
+                        .toLowerCase()
+                        .includes(search);
 
-    item.className =
-        "training-item";
+                const matchSport =
+                    sport === ""
+                    ||
+                    court.sport === sport;
 
+                let matchPrice = true;
 
-    item.innerHTML = `
-
-        <div>
-
-            <strong>
-                ${goal}
-            </strong>
-
-            <p>
-                ${sport} • ${day} • ${time} น.
-            </p>
-
-        </div>
-
-        <span>
-            🏃
-        </span>
-
-    `;
-
-
-    list.appendChild(item);
-
-
-    document.getElementById("goal")
-        .value = "";
-
-
-    showToast(
-        "เพิ่มแผนการซ้อมแล้ว ✓"
-    );
-
-}
-
-
-/* =====================================================
-   GRAPH THEORY
-===================================================== */
-
-const sportGraph = {
-
-    "ฟุตบอล": [
-        "บาสเกตบอล",
-        "แบดมินตัน",
-        "วอลเลย์บอล"
-    ],
-
-    "บาสเกตบอล": [
-        "ฟุตบอล",
-        "แบดมินตัน",
-        "เทนนิส"
-    ],
-
-    "แบดมินตัน": [
-        "ฟุตบอล",
-        "บาสเกตบอล",
-        "เทนนิส"
-    ],
-
-    "เทนนิส": [
-        "บาสเกตบอล",
-        "แบดมินตัน",
-        "วอลเลย์บอล"
-    ],
-
-    "วอลเลย์บอล": [
-        "ฟุตบอล",
-        "เทนนิส",
-        "ฟุตซอล"
-    ],
-
-    "ฟุตซอล": [
-        "ฟุตบอล",
-        "วอลเลย์บอล"
-    ]
-
-};
-
-
-/* =====================================================
-   ADJACENCY LIST
-===================================================== */
-
-function renderAdjacencyList() {
-
-    const box =
-        document.getElementById(
-            "adjacencyList"
-        );
-
-
-    box.innerHTML =
-        Object.entries(sportGraph)
-            .map(
-                ([sport, neighbors]) => {
-
-                    return `
-                        ${sport}
-                        → ${neighbors.join(", ")}
-                    `;
-
+                if (price === "low") {
+                    matchPrice =
+                        court.price < 300;
                 }
+
+                if (price === "high") {
+                    matchPrice =
+                        court.price >= 300;
+                }
+
+                return (
+                    matchSearch
+                    &&
+                    matchSport
+                    &&
+                    matchPrice
+                );
+
+            });
+
+
+        displayCourts(
+            "bookingCourts",
+            filtered
+        );
+
+    }
+
+
+    /* =========================================
+       BOOKING MODAL
+    ========================================= */
+
+    let selectedCourt = null;
+
+
+    function openBooking(id) {
+
+        selectedCourt =
+            courts.find(
+                court => court.id === id
+            );
+
+
+        if (!selectedCourt) return;
+
+
+        document
+            .getElementById("modalCourt")
+            .value =
+            selectedCourt.name;
+
+
+        document
+            .getElementById("modalDate")
+            .value =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        document
+            .getElementById("bookingModal")
+            .classList.add("show");
+
+    }
+
+
+    function closeModal() {
+
+        document
+            .getElementById("bookingModal")
+            .classList.remove("show");
+
+    }
+
+
+    /* =========================================
+       CONFIRM BOOKING
+    ========================================= */
+
+    function confirmBooking() {
+
+        if (!selectedCourt) return;
+
+
+        const date =
+            document
+                .getElementById("modalDate")
+                .value;
+
+        const time =
+            document
+                .getElementById("modalTime")
+                .value;
+
+
+        if (!date) {
+
+            showToast(
+                "กรุณาเลือกวันที่"
+            );
+
+            return;
+        }
+
+
+        const bookingId =
+            "SB-2026-" +
+            Math.floor(
+                100 +
+                Math.random() * 900
+            );
+
+
+        document
+            .getElementById("ticketId")
+            .textContent =
+            bookingId;
+
+
+        document
+            .getElementById("ticketSport")
+            .textContent =
+            selectedCourt.sport;
+
+
+        document
+            .getElementById("ticketCourt")
+            .textContent =
+            selectedCourt.name;
+
+
+        document
+            .getElementById("ticketDate")
+            .textContent =
+            formatDate(date);
+
+
+        document
+            .getElementById("ticketTime")
+            .textContent =
+            time;
+
+
+        document
+            .getElementById("ticketPrice")
+            .textContent =
+            "฿" + selectedCourt.price;
+
+
+        closeModal();
+
+
+        showToast(
+            "จองสนามสำเร็จแล้ว ✓"
+        );
+
+
+        setTimeout(() => {
+
+            showPage("ticket");
+
+        }, 500);
+
+    }
+
+
+    /* =========================================
+       FORMAT DATE
+    ========================================= */
+
+    function formatDate(date) {
+
+        const d =
+            new Date(
+                date + "T00:00:00"
+            );
+
+
+        return String(
+            d.getDate()
+        ).padStart(2, "0")
+        + "/"
+        +
+        String(
+            d.getMonth() + 1
+        ).padStart(2, "0")
+        + "/"
+        +
+        d.getFullYear();
+
+    }
+
+
+    /* =========================================
+       TRAINING DATA
+    ========================================= */
+
+    let trainingPlans = [
+
+        {
+            name:
+                "ฝึกฟุตบอลพื้นฐาน",
+
+            sport:
+                "ฟุตบอล",
+
+            day:
+                "จันทร์",
+
+            time:
+                "17:00",
+
+            duration:
+                "60 นาที"
+        },
+
+        {
+            name:
+                "ฝึกความแข็งแรง",
+
+            sport:
+                "บาสเกตบอล",
+
+            day:
+                "พุธ",
+
+            time:
+                "18:00",
+
+            duration:
+                "90 นาที"
+        }
+
+    ];
+
+
+    /* =========================================
+       DISPLAY TRAINING
+    ========================================= */
+
+    function displayTraining() {
+
+        const list =
+            document.getElementById(
+                "trainingList"
+            );
+
+
+        if (trainingPlans.length === 0) {
+
+            list.innerHTML = `
+
+                <div
+                    style="
+                        text-align:center;
+                        color:#64748b;
+                        padding:30px;
+                    "
+                >
+                    ยังไม่มีตารางซ้อม
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        list.innerHTML =
+            trainingPlans.map(
+                (plan, index) => `
+
+                    <div class="training-item">
+
+                        <div>
+
+                            <strong>
+                                ${plan.name}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                ${plan.sport}
+                                •
+                                ${plan.day}
+                                •
+                                ${plan.time}
+                                •
+                                ${plan.duration}
+                            </small>
+
+                        </div>
+
+
+                        <button
+                            class="btn"
+                            style="
+                                background:#fee2e2;
+                                color:#dc2626;
+                                padding:7px 10px;
+                            "
+                            onclick="
+                                deleteTraining(${index})
+                            "
+                        >
+                            ลบ
+                        </button>
+
+                    </div>
+
+                `
+            ).join("");
+
+    }
+
+
+    /* =========================================
+       ADD TRAINING
+    ========================================= */
+
+    function addTraining() {
+
+        const name =
+            document
+                .getElementById("planName")
+                .value
+                .trim();
+
+
+        const sport =
+            document
+                .getElementById("trainingSport")
+                .value;
+
+
+        const day =
+            document
+                .getElementById("trainingDay")
+                .value;
+
+
+        const time =
+            document
+                .getElementById("trainingTime")
+                .value;
+
+
+        const duration =
+            document
+                .getElementById("trainingDuration")
+                .value;
+
+
+        if (!name) {
+
+            showToast(
+                "กรุณาใส่ชื่อแผนการซ้อม"
+            );
+
+            return;
+        }
+
+
+        trainingPlans.push({
+
+            name,
+            sport,
+            day,
+            time,
+            duration
+
+        });
+
+
+        displayTraining();
+
+
+        document
+            .getElementById("planName")
+            .value = "";
+
+
+        showToast(
+            "เพิ่มตารางซ้อมแล้ว ✓"
+        );
+
+    }
+
+
+    /* =========================================
+       DELETE TRAINING
+    ========================================= */
+
+    function deleteTraining(index) {
+
+        trainingPlans.splice(
+            index,
+            1
+        );
+
+        displayTraining();
+
+        showToast(
+            "ลบตารางซ้อมแล้ว"
+        );
+
+    }
+
+
+    /* =========================================
+       GRAPH THEORY
+    ========================================= */
+
+    const sportGraph = {
+
+        "ฟุตบอล": [
+            "บาสเกตบอล",
+            "แบดมินตัน",
+            "วอลเลย์บอล"
+        ],
+
+        "บาสเกตบอล": [
+            "ฟุตบอล",
+            "แบดมินตัน",
+            "เทนนิส"
+        ],
+
+        "แบดมินตัน": [
+            "ฟุตบอล",
+            "บาสเกตบอล",
+            "เทนนิส"
+        ],
+
+        "เทนนิส": [
+            "บาสเกตบอล",
+            "แบดมินตัน",
+            "วอลเลย์บอล"
+        ],
+
+        "วอลเลย์บอล": [
+            "ฟุตบอล",
+            "เทนนิส",
+            "ฟุตซอล"
+        ],
+
+        "ฟุตซอล": [
+            "ฟุตบอล",
+            "วอลเลย์บอล"
+        ]
+
+    };
+
+
+    /* =========================================
+       GRAPH EDGES
+    ========================================= */
+
+    const graphEdges = [
+
+        ["ฟุตบอล", "บาสเกตบอล"],
+
+        ["ฟุตบอล", "แบดมินตัน"],
+
+        ["ฟุตบอล", "วอลเลย์บอล"],
+
+        ["บาสเกตบอล", "แบดมินตัน"],
+
+        ["บาสเกตบอล", "เทนนิส"],
+
+        ["แบดมินตัน", "เทนนิส"],
+
+        ["เทนนิส", "วอลเลย์บอล"],
+
+        ["วอลเลย์บอล", "ฟุตซอล"]
+
+    ];
+
+
+    /* =========================================
+       RENDER GRAPH
+    ========================================= */
+
+    function renderGraph() {
+
+        const vertices =
+            document.getElementById(
+                "vertices"
+            );
+
+
+        vertices.innerHTML =
+            Object.keys(
+                sportGraph
+            )
+            .map(
+                sport => `
+                    <span class="vertex">
+                        ${sport}
+                    </span>
+                `
+            )
+            .join("");
+
+
+        const edges =
+            document.getElementById(
+                "edges"
+            );
+
+
+        edges.innerHTML =
+            graphEdges
+                .map(
+                    edge => `
+                        <div class="edge">
+                            ${edge[0]}
+                            ↔
+                            ${edge[1]}
+                        </div>
+                    `
+                )
+                .join("");
+
+
+        const adjacency =
+            document.getElementById(
+                "adjacencyList"
+            );
+
+
+        adjacency.innerHTML =
+            Object.entries(
+                sportGraph
+            )
+            .map(
+                ([key, values]) =>
+                    `${key} → [${values.join(", ")}]`
             )
             .join("<br>");
 
-}
+    }
 
 
-/* =====================================================
-   TREE
-===================================================== */
+    /* =========================================
+       TREE THEORY
+    ========================================= */
 
-const bookingTree = {
+    const bookingTree = {
 
-    name: "การจองสนาม",
+        name:
+            "การจองสนาม",
 
-    children: [
+        children: [
 
-        {
+            {
 
-            name: "ประเภทกีฬา",
+                name:
+                    "ประเภทกีฬา",
 
-            children: [
+                children: [
 
-                {
+                    {
 
-                    name: "ฟุตบอล",
+                        name:
+                            "ฟุตบอล",
 
-                    children: [
+                        children: [
 
-                        {
-                            name: "สนาม A"
-                        },
+                            {
+                                name:
+                                    "สนาม A"
+                            },
 
-                        {
-                            name: "สนาม B"
-                        }
+                            {
+                                name:
+                                    "สนาม B"
+                            }
 
-                    ]
+                        ]
 
-                },
-
-
-                {
-
-                    name: "บาสเกตบอล",
-
-                    children: [
-
-                        {
-                            name: "สนาม C"
-                        }
-
-                    ]
-
-                },
+                    },
 
 
-                {
+                    {
 
-                    name: "แบดมินตัน",
+                        name:
+                            "บาสเกตบอล",
 
-                    children: [
+                        children: [
 
-                        {
-                            name: "สนาม D"
-                        }
+                            {
+                                name:
+                                    "สนาม C"
+                            }
 
-                    ]
+                        ]
 
-                }
-
-            ]
-
-        }
-
-    ]
-
-};
+                    },
 
 
-/* =====================================================
-   BFS
-===================================================== */
+                    {
 
-function bfsTree(root) {
+                        name:
+                            "แบดมินตัน",
 
-    const queue = [root];
+                        children: [
 
-    const result = [];
+                            {
+                                name:
+                                    "สนาม D"
+                            }
+
+                        ]
+
+                    }
+
+                ]
+
+            }
+
+        ]
+
+    };
 
 
-    while (queue.length > 0) {
+    /* =========================================
+       BFS
+    ========================================= */
 
-        const node =
-            queue.shift();
+    function bfsTree(root) {
+
+        const queue = [root];
+
+        const result = [];
 
 
-        result.push(
-            node.name
-        );
+        while (queue.length > 0) {
+
+            const current =
+                queue.shift();
 
 
-        if (node.children) {
-
-            node.children.forEach(
-                child => {
-                    queue.push(child);
-                }
+            result.push(
+                current.name
             );
 
+
+            if (current.children) {
+
+                current.children.forEach(
+                    child => {
+                        queue.push(child);
+                    }
+                );
+
+            }
+
         }
+
+
+        return result;
 
     }
 
 
-    return result;
+    /* =========================================
+       UPDATE BFS
+    ========================================= */
 
-}
+    function renderBFS() {
 
-
-/* =====================================================
-   RENDER BFS
-===================================================== */
-
-function renderBFS() {
-
-    const result =
-        bfsTree(bookingTree);
+        const result =
+            bfsTree(
+                bookingTree
+            );
 
 
-    document.getElementById(
-        "bfsResult"
-    ).innerHTML =
+        document
+            .getElementById("bfsResult")
+            .textContent =
+            result.join(" → ");
 
-        result.join(
-            " → "
+    }
+
+
+    /* =========================================
+       TOAST
+    ========================================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
         );
 
-}
 
+        setTimeout(() => {
 
-/* =====================================================
-   PRINT TICKET
-===================================================== */
+            toast.classList.remove(
+                "show"
+            );
 
-function printTicket() {
-
-    window.print();
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById("toast");
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add("show");
-
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    }, 2500);
-
-}
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        renderCourts();
-
-        renderAdjacencyList();
-
-        renderBFS();
+        }, 2500);
 
     }
-);
 
 
-/* =====================================================
-   CLOSE MODAL WHEN CLICK OUTSIDE
-===================================================== */
+    /* =========================================
+       PRINT TICKET
+    ========================================= */
 
-document.getElementById(
-    "bookingModal"
-).addEventListener(
-    "click",
-    function(event) {
+    function printTicket() {
 
-        if (
-            event.target === this
-        ) {
+        const ticket =
+            document.querySelector(
+                ".ticket"
+            );
 
-            closeModal();
+
+        const printWindow =
+            window.open(
+                "",
+                "_blank"
+            );
+
+
+        printWindow.document.write(`
+
+            <!DOCTYPE html>
+
+            <html lang="th">
+
+            <head>
+
+                <meta charset="UTF-8">
+
+                <title>
+                    SportBook Ticket
+                </title>
+
+                <style>
+
+                    body {
+                        font-family:
+                        Arial,
+                        sans-serif;
+
+                        padding:40px;
+                    }
+
+                    .ticket {
+
+                        max-width:700px;
+
+                        margin:auto;
+
+                        background:
+                        #071a33;
+
+                        color:white;
+
+                        padding:30px;
+
+                        border-radius:20px;
+                    }
+
+                    .header {
+
+                        display:flex;
+
+                        justify-content:
+                        space-between;
+
+                        border-bottom:
+                        1px dashed #aaa;
+
+                        padding-bottom:20px;
+                    }
+
+                    .grid {
+
+                        display:grid;
+
+                        grid-template-columns:
+                        repeat(2,1fr);
+
+                        gap:20px;
+
+                        margin-top:30px;
+                    }
+
+                    label {
+
+                        display:block;
+
+                        color:#aaa;
+
+                        font-size:12px;
+                    }
+
+                    strong {
+
+                        font-size:17px;
+                    }
+
+                </style>
+
+            </head>
+
+
+            <body>
+
+                <div class="ticket">
+
+                    <div class="header">
+
+                        <h2>
+                            SportBook
+                        </h2>
+
+                        <strong>
+                            ✓ CONFIRMED
+                        </strong>
+
+                    </div>
+
+
+                    <div class="grid">
+
+                        <div>
+                            <label>
+                                Booking ID
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketId"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                กีฬา
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketSport"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                สนาม
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketCourt"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                วันที่
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketDate"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                เวลา
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketTime"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <label>
+                                ราคา
+                            </label>
+
+                            <strong>
+                                ${
+                                    document
+                                    .getElementById(
+                                        "ticketPrice"
+                                    )
+                                    .textContent
+                                }
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <script>
+
+                    window.onload =
+                    function() {
+
+                        window.print();
+
+                    };
+
+                <\/script>
+
+            </body>
+
+            </html>
+
+        `);
+
+
+        printWindow.document.close();
+
+    }
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            displayCourts(
+                "homeCourts",
+                courts.slice(0, 3)
+            );
+
+
+            displayCourts(
+                "bookingCourts",
+                courts
+            );
+
+
+            displayTraining();
+
+
+            renderGraph();
+
+
+            renderBFS();
 
         }
+    );
 
-    }
-);
+
+    /* =========================================
+       CLOSE MODAL WHEN CLICK OUTSIDE
+    ========================================= */
+
+    document
+        .getElementById("bookingModal")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
 
 </script>
 
