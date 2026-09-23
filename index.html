@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -13,8 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- เปลี่ยนฟอนต์หลักเป็น Itim -->
-    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
 
@@ -45,7 +43,7 @@
 
         /* =========================================
            RESET
-        ========================================== */
+        ========================================= */
 
         * {
             margin: 0;
@@ -58,7 +56,7 @@
         }
 
         body {
-            font-family: "Itim", cursive;
+            font-family: "Prompt", sans-serif;
             background: var(--light);
             color: #172033;
             line-height: 1.6;
@@ -77,7 +75,7 @@
 
         /* =========================================
            NAVBAR
-        ========================================== */
+        ========================================= */
 
         .navbar {
             position: sticky;
@@ -99,7 +97,7 @@
 
         /* =========================================
            LOGO
-        ========================================== */
+        ========================================= */
 
         .logo {
             display: flex;
@@ -139,7 +137,7 @@
         }
 
         .logo-main {
-            font-family: "Itim", cursive;
+            font-family: "Montserrat", sans-serif;
             font-size: 23px;
             font-weight: 800;
             letter-spacing: 0.5px;
@@ -152,9 +150,9 @@
         .logo-text small {
             margin-top: 5px;
 
-            font-family: "Itim", cursive;
-            font-size: 10px;
-            letter-spacing: 1px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 8px;
+            letter-spacing: 2px;
 
             color: #BFD7FF;
         }
@@ -162,7 +160,7 @@
 
         /* =========================================
            NAVIGATION
-        ========================================== */
+        ========================================= */
 
         .nav-menu {
             display: flex;
@@ -178,8 +176,8 @@
             padding: 10px 18px;
             border-radius: 10px;
 
-            font-size: 16px;
-            font-weight: 400;
+            font-size: 15px;
+            font-weight: 500;
 
             transition: 0.25s;
         }
@@ -197,7 +195,7 @@
 
         /* =========================================
            PAGE
-        ========================================== */
+        ========================================= */
 
         .page {
             display: none;
@@ -211,7 +209,7 @@
 
         /* =========================================
            HERO
-        ========================================== */
+        ========================================= */
 
         .hero {
             min-height: 520px;
@@ -251,13 +249,13 @@
             color: #FFE9A3;
             background: rgba(212, 175, 55, 0.10);
 
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .hero h1 {
-            font-family: "Itim", cursive;
+            font-family: "Montserrat", sans-serif;
 
-            font-size: clamp(45px, 6vw, 75px);
+            font-size: clamp(40px, 6vw, 70px);
             line-height: 1.05;
 
             margin-bottom: 20px;
@@ -269,7 +267,7 @@
 
         .hero p {
             color: #D9E7F7;
-            font-size: 20px;
+            font-size: 18px;
 
             max-width: 650px;
             margin-bottom: 30px;
@@ -278,7 +276,7 @@
 
         /* =========================================
            BUTTON
-        ========================================== */
+        ========================================= */
 
         .btn {
             border: none;
@@ -286,8 +284,8 @@
 
             padding: 12px 22px;
 
-            font-size: 16px;
-            font-weight: 400;
+            font-size: 15px;
+            font-weight: 600;
 
             transition: 0.25s;
         }
@@ -337,7 +335,7 @@
 
         /* =========================================
            SECTION
-        ========================================== */
+        ========================================= */
 
         .section {
             padding: 70px 7%;
@@ -348,9 +346,9 @@
         }
 
         .section-title h2 {
-            font-family: "Itim", cursive;
+            font-family: "Montserrat", sans-serif;
 
-            font-size: 34px;
+            font-size: 30px;
             color: var(--navy);
 
             position: relative;
@@ -382,13 +380,12 @@
         .section-title p {
             color: var(--gray);
             margin-top: 12px;
-            font-size: 17px;
         }
 
 
         /* =========================================
            QUICK MENU
-        ========================================== */
+        ========================================= */
 
         .quick-grid {
             display: grid;
@@ -437,18 +434,17 @@
         .quick-card h3 {
             margin-bottom: 7px;
             color: var(--navy);
-            font-size: 23px;
         }
 
         .quick-card p {
             color: var(--gray);
-            font-size: 16px;
+            font-size: 14px;
         }
 
 
         /* =========================================
            COURT CARDS
-        ========================================== */
+        ========================================= */
 
         .court-grid {
             display: grid;
@@ -491,12 +487,11 @@
         .court-body h3 {
             color: var(--navy);
             margin-bottom: 7px;
-            font-size: 23px;
         }
 
         .court-location {
             color: var(--gray);
-            font-size: 16px;
+            font-size: 14px;
             margin-bottom: 10px;
         }
 
@@ -509,14 +504,13 @@
         }
 
         .price {
-            font-weight: 400;
+            font-weight: 700;
             color: var(--primary);
-            font-size: 18px;
         }
 
         .rating {
             color: #D89C00;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .tag {
@@ -529,13 +523,13 @@
 
             border-radius: 20px;
 
-            font-size: 14px;
+            font-size: 12px;
         }
 
 
         /* =========================================
            FILTER
-        ========================================== */
+        ========================================= */
 
         .filter-box {
             display: grid;
@@ -569,8 +563,6 @@
             outline: none;
 
             background: #CFE0EB;
-
-            font-size: 16px;
         }
 
         .input:focus,
@@ -581,7 +573,7 @@
 
         /* =========================================
            TRAINING
-        ========================================== */
+        ========================================= */
 
         .training-layout {
             display: grid;
@@ -607,7 +599,6 @@
         .panel h3 {
             color: var(--navy);
             margin-bottom: 20px;
-            font-size: 23px;
         }
 
         .form-group {
@@ -617,8 +608,8 @@
         .form-group label {
             display: block;
 
-            font-size: 16px;
-            font-weight: 400;
+            font-size: 14px;
+            font-weight: 500;
 
             margin-bottom: 7px;
 
@@ -646,13 +637,12 @@
 
         .plan-item small {
             color: var(--gray);
-            font-size: 14px;
         }
 
 
         /* =========================================
            TICKET PAGE
-        ========================================== */
+        ========================================= */
 
         .ticket-wrapper {
             max-width: 900px;
@@ -691,8 +681,7 @@
         }
 
         .ticket-header h2 {
-            font-family: "Itim", cursive;
-            font-size: 28px;
+            font-family: "Montserrat", sans-serif;
         }
 
         .ticket-status {
@@ -703,8 +692,8 @@
 
             border-radius: 20px;
 
-            font-size: 15px;
-            font-weight: 400;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .ticket-content {
@@ -719,10 +708,10 @@
 
             color: var(--primary);
 
-            font-family: "Itim", cursive;
+            font-family: "Montserrat", sans-serif;
 
-            font-size: 25px;
-            font-weight: 400;
+            font-size: 20px;
+            font-weight: 800;
 
             margin-bottom: 25px;
         }
@@ -753,14 +742,13 @@
 
             color: var(--gray);
 
-            font-size: 14px;
+            font-size: 13px;
 
             margin-bottom: 4px;
         }
 
         .ticket-detail strong {
             color: var(--navy);
-            font-size: 18px;
         }
 
         .ticket-total {
@@ -775,14 +763,14 @@
         }
 
         .ticket-total strong {
-            font-size: 28px;
+            font-size: 25px;
             color: var(--primary);
         }
 
 
         /* =========================================
            HIDE GRAPH & TREE ON PAGE 4
-        ========================================== */
+        ========================================= */
 
         #ticket .theory-section {
             display: none !important;
@@ -791,7 +779,9 @@
 
         /* =========================================
            GRAPH / TREE
-        ========================================== */
+           เก็บไว้สำหรับหลักการทฤษฎี
+           แต่ไม่แสดงบนหน้าเว็บ
+        ========================================= */
 
         .theory-section {
             margin-top: 30px;
@@ -830,7 +820,7 @@
 
             text-align: center;
 
-            font-weight: 400;
+            font-weight: 600;
         }
 
         .edge-list {
@@ -878,7 +868,7 @@
 
         /* =========================================
            MODAL
-        ========================================== */
+        ========================================= */
 
         .modal {
             position: fixed;
@@ -939,10 +929,6 @@
             margin-bottom: 20px;
         }
 
-        .modal-header h3 {
-            font-size: 25px;
-        }
-
         .close {
             border: none;
 
@@ -959,7 +945,7 @@
 
         /* =========================================
            TOAST
-        ========================================== */
+        ========================================= */
 
         .toast {
             position: fixed;
@@ -984,8 +970,6 @@
             transition: 0.3s;
 
             z-index: 3000;
-
-            font-size: 16px;
         }
 
         .toast.show {
@@ -996,7 +980,7 @@
 
         /* =========================================
            EMPTY
-        ========================================== */
+        ========================================= */
 
         .empty {
             text-align: center;
@@ -1010,14 +994,12 @@
             border-radius: var(--radius);
 
             border: 1px dashed var(--border);
-
-            font-size: 17px;
         }
 
 
         /* =========================================
            FOOTER
-        ========================================== */
+        ========================================= */
 
         footer {
             background: var(--navy);
@@ -1029,13 +1011,10 @@
             text-align: center;
 
             margin-top: 50px;
-
-            font-size: 16px;
         }
 
         footer strong {
             color: white;
-            font-size: 22px;
         }
 
         footer span {
@@ -1045,7 +1024,7 @@
 
         /* =========================================
            RESPONSIVE
-        ========================================== */
+        ========================================= */
 
         @media (max-width: 900px) {
 
@@ -1087,7 +1066,7 @@
 
                 padding: 8px 12px;
 
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .hero {
@@ -1097,7 +1076,7 @@
             }
 
             .hero h1 {
-                font-size: 45px;
+                font-size: 40px;
             }
 
             .section {
@@ -1131,7 +1110,7 @@
         @media (max-width: 450px) {
 
             .logo-main {
-                font-size: 21px;
+                font-size: 19px;
             }
 
             .logo-mark {
@@ -1140,7 +1119,7 @@
             }
 
             .hero h1 {
-                font-size: 38px;
+                font-size: 34px;
             }
 
             .ticket-content {
@@ -1165,82 +1144,33 @@
         <a href="#" class="logo" onclick="showPage('home'); return false;">
 
             <div class="logo-mark">
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+        <linearGradient id="goldGradLogo1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f9e8a2"/>
+            <stop offset="50%" stop-color="#c5a059"/>
+            <stop offset="100%" stop-color="#7a5c28"/>
+        </linearGradient>
+        <linearGradient id="blueGradLogo1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2980b9"/>
+            <stop offset="100%" stop-color="#0e2a47"/>
+        </linearGradient>
+    </defs>
+    <circle cx="100" cy="100" r="90" stroke="url(#goldGradLogo1)" stroke-width="4" fill="none"/>
+    <circle cx="100" cy="100" r="82" stroke="url(#blueGradLogo1)" stroke-width="6" fill="none"/>
+    <circle cx="100" cy="100" r="76" stroke="url(#goldGradLogo1)" stroke-width="2" fill="none"/>
+    <path d="M30 100 A70 70 0 0 1 170 100" stroke="#1d426d" stroke-width="1.5" fill="none" stroke-dasharray="4 2"/>
+    <path d="M40 70 A70 70 0 0 1 160 70" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+    <path d="M40 130 A70 70 0 0 0 160 130" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+    <line x1="100" y1="24" x2="100" y2="176" stroke="#1d426d" stroke-width="1.5"/>
+    <line x1="60" y1="30" x2="140" y2="170" stroke="#1d426d" stroke-width="1"/>
+    <line x1="140" y1="30" x2="60" y2="170" stroke="#1d426d" stroke-width="1"/>
+    <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z" fill="url(#blueGradLogo1)" stroke="url(#goldGradLogo1)" stroke-width="3"/>
+    <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z" fill="url(#goldGradLogo1)"/>
+    <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z" fill="#1a6b9c"/>
+    <circle cx="120" cy="72" r="6" fill="url(#goldGradLogo1)"/>
+</svg>
 
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
-
-                    <defs>
-
-                        <linearGradient id="goldGradLogo1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#f9e8a2"/>
-                            <stop offset="50%" stop-color="#c5a059"/>
-                            <stop offset="100%" stop-color="#7a5c28"/>
-                        </linearGradient>
-
-                        <linearGradient id="blueGradLogo1" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#2980b9"/>
-                            <stop offset="100%" stop-color="#0e2a47"/>
-                        </linearGradient>
-
-                    </defs>
-
-                    <circle cx="100" cy="100" r="90"
-                        stroke="url(#goldGradLogo1)"
-                        stroke-width="4"
-                        fill="none"/>
-
-                    <circle cx="100" cy="100" r="82"
-                        stroke="url(#blueGradLogo1)"
-                        stroke-width="6"
-                        fill="none"/>
-
-                    <circle cx="100" cy="100" r="76"
-                        stroke="url(#goldGradLogo1)"
-                        stroke-width="2"
-                        fill="none"/>
-
-                    <path d="M30 100 A70 70 0 0 1 170 100"
-                        stroke="#1d426d"
-                        stroke-width="1.5"
-                        fill="none"
-                        stroke-dasharray="4 2"/>
-
-                    <path d="M40 70 A70 70 0 0 1 160 70"
-                        stroke="#1d426d"
-                        stroke-width="1.5"
-                        fill="none"/>
-
-                    <path d="M40 130 A70 70 0 0 0 160 130"
-                        stroke="#1d426d"
-                        stroke-width="1.5"
-                        fill="none"/>
-
-                    <line x1="100" y1="24" x2="100" y2="176"
-                        stroke="#1d426d"
-                        stroke-width="1.5"/>
-
-                    <line x1="60" y1="30" x2="140" y2="170"
-                        stroke="#1d426d"
-                        stroke-width="1"/>
-
-                    <line x1="140" y1="30" x2="60" y2="170"
-                        stroke="#1d426d"
-                        stroke-width="1"/>
-
-                    <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z"
-                        fill="url(#blueGradLogo1)"
-                        stroke="url(#goldGradLogo1)"
-                        stroke-width="3"/>
-
-                    <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z"
-                        fill="url(#goldGradLogo1)"/>
-
-                    <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z"
-                        fill="#1a6b9c"/>
-
-                    <circle cx="120" cy="72" r="6"
-                        fill="url(#goldGradLogo1)"/>
-
-                </svg>
 
             </div>
 
@@ -1351,104 +1281,43 @@
                 <div class="quick-card">
 
                     <div class="quick-icon">
+                        <svg id="svgIconStadium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                <defs>
+                  <linearGradient id="stadiumGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFE899"/>
+                    <stop offset="50%" stop-color="#F4D068"/>
+                    <stop offset="100%" stop-color="#AA771C"/>
+                  </linearGradient>
+                  <linearGradient id="stadiumCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#81E6D9"/>
+                    <stop offset="100%" stop-color="#2B80C5"/>
+                  </linearGradient>
+                  <linearGradient id="stadiumNavy" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#1B2A52"/>
+                    <stop offset="100%" stop-color="#0A1128"/>
+                  </linearGradient>
+                </defs>
 
-                        <svg id="svgIconStadium"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 100 100"
-                            width="40"
-                            height="40">
+                <!-- Outer Stadium Oval Base -->
+                <ellipse cx="50" cy="65" rx="36" ry="18" fill="url(#stadiumNavy)" stroke="url(#stadiumGold)" stroke-width="3"/>
+                <ellipse cx="50" cy="65" rx="26" ry="12" fill="none" stroke="url(#stadiumCyan)" stroke-width="2" stroke-dasharray="3,2"/>
+                <ellipse cx="50" cy="65" rx="14" ry="6" fill="none" stroke="url(#stadiumGold)" stroke-width="1.5"/>
 
-                            <defs>
+                <!-- Arch Stadium Columns / Pillars -->
+                <path d="M 18 50 C 18 28, 82 28, 82 50" fill="none" stroke="url(#stadiumGold)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 26 42 C 26 32, 74 32, 74 42" fill="none" stroke="url(#stadiumCyan)" stroke-width="2"/>
 
-                                <linearGradient id="stadiumGold"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
+                <!-- Vertical Pillars -->
+                <line x1="22" y1="46" x2="22" y2="60" stroke="url(#stadiumGold)" stroke-width="2.5"/>
+                <line x1="34" y1="36" x2="34" y2="64" stroke="url(#stadiumGold)" stroke-width="2.5"/>
+                <line x1="50" y1="32" x2="50" y2="65" stroke="url(#stadiumCyan)" stroke-width="2.5"/>
+                <line x1="66" y1="36" x2="66" y2="64" stroke="url(#stadiumGold)" stroke-width="2.5"/>
+                <line x1="78" y1="46" x2="78" y2="60" stroke="url(#stadiumGold)" stroke-width="2.5"/>
 
-                                    <stop offset="0%" stop-color="#FFE899"/>
-                                    <stop offset="50%" stop-color="#F4D068"/>
-                                    <stop offset="100%" stop-color="#AA771C"/>
-
-                                </linearGradient>
-
-                                <linearGradient id="stadiumCyan"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#81E6D9"/>
-                                    <stop offset="100%" stop-color="#2B80C5"/>
-
-                                </linearGradient>
-
-                                <linearGradient id="stadiumNavy"
-                                    x1="0%" y1="0%"
-                                    x2="0%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#1B2A52"/>
-                                    <stop offset="100%" stop-color="#0A1128"/>
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <ellipse cx="50" cy="65"
-                                rx="36" ry="18"
-                                fill="url(#stadiumNavy)"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="3"/>
-
-                            <ellipse cx="50" cy="65"
-                                rx="26" ry="12"
-                                fill="none"
-                                stroke="url(#stadiumCyan)"
-                                stroke-width="2"
-                                stroke-dasharray="3,2"/>
-
-                            <ellipse cx="50" cy="65"
-                                rx="14" ry="6"
-                                fill="none"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="1.5"/>
-
-                            <path d="M 18 50 C 18 28, 82 28, 82 50"
-                                fill="none"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="4"
-                                stroke-linecap="round"/>
-
-                            <path d="M 26 42 C 26 32, 74 32, 74 42"
-                                fill="none"
-                                stroke="url(#stadiumCyan)"
-                                stroke-width="2"/>
-
-                            <line x1="22" y1="46" x2="22" y2="60"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="2.5"/>
-
-                            <line x1="34" y1="36" x2="34" y2="64"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="2.5"/>
-
-                            <line x1="50" y1="32" x2="50" y2="65"
-                                stroke="url(#stadiumCyan)"
-                                stroke-width="2.5"/>
-
-                            <line x1="66" y1="36" x2="66" y2="64"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="2.5"/>
-
-                            <line x1="78" y1="46" x2="78" y2="60"
-                                stroke="url(#stadiumGold)"
-                                stroke-width="2.5"/>
-
-                            <path d="M 50 16 C 44 16, 40 20, 40 26 C 40 34, 50 44, 50 44 C 50 44, 60 34, 60 26 C 60 20, 56 16, 50 16 Z"
-                                fill="url(#stadiumGold)"/>
-
-                            <circle cx="50" cy="25"
-                                r="3.5"
-                                fill="#0A1128"/>
-
-                        </svg>
-
+                <!-- Location Pin Marker in Center -->
+                <path d="M 50 16 C 44 16, 40 20, 40 26 C 40 34, 50 44, 50 44 C 50 44, 60 34, 60 26 C 60 20, 56 16, 50 16 Z" fill="url(#stadiumGold)"/>
+                <circle cx="50" cy="25" r="3.5" fill="#0A1128"/>
+              </svg>
                     </div>
 
                     <h3>
@@ -1466,73 +1335,24 @@
                 <div class="quick-card">
 
                     <div class="quick-icon">
-
-                        <svg id="svgIconCalendar"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="40"
-                            height="40"
-                            fill="none">
-
-                            <defs>
-
-                                <linearGradient id="goldAccentSchedule"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#F4D068"/>
-                                    <stop offset="100%" stop-color="#AA771C"/>
-
-                                </linearGradient>
-
-                                <linearGradient id="cyanAccentSchedule"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#4AD0E8"/>
-                                    <stop offset="100%" stop-color="#1B6093"/>
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <rect x="4" y="5"
-                                width="16"
-                                height="16"
-                                rx="2.5"
-                                fill="#124170"
-                                stroke="url(#goldAccentSchedule)"
-                                stroke-width="1.5"/>
-
-                            <path d="M9 3H15V6H9V3Z"
-                                fill="url(#goldAccentSchedule)"/>
-
-                            <rect x="10" y="2"
-                                width="4"
-                                height="2"
-                                rx="0.5"
-                                fill="#4AD0E8"/>
-
-                            <line x1="8" y1="10"
-                                x2="16" y2="10"
-                                stroke="url(#cyanAccentSchedule)"
-                                stroke-width="2"
-                                stroke-linecap="round"/>
-
-                            <line x1="8" y1="14"
-                                x2="14" y2="14"
-                                stroke="url(#cyanAccentSchedule)"
-                                stroke-width="2"
-                                stroke-linecap="round"/>
-
-                            <line x1="8" y1="18"
-                                x2="12" y2="18"
-                                stroke="url(#goldAccentSchedule)"
-                                stroke-width="2"
-                                stroke-linecap="round"/>
-
-                        </svg>
-
+                        <svg id="svgIconCalendar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none">
+  <defs>
+    <linearGradient id="goldAccentSchedule" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F4D068" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+    <linearGradient id="cyanAccentSchedule" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4AD0E8" />
+      <stop offset="100%" stop-color="#1B6093" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="5" width="16" height="16" rx="2.5" fill="#124170" stroke="url(#goldAccentSchedule)" stroke-width="1.5"/>
+  <path d="M9 3H15V6H9V3Z" fill="url(#goldAccentSchedule)"/>
+  <rect x="10" y="2" width="4" height="2" rx="0.5" fill="#4AD0E8"/>
+  <line x1="8" y1="10" x2="16" y2="10" stroke="url(#cyanAccentSchedule)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="8" y1="14" x2="14" y2="14" stroke="url(#cyanAccentSchedule)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="8" y1="18" x2="12" y2="18" stroke="url(#goldAccentSchedule)" stroke-width="2" stroke-linecap="round"/>
+</svg>
                     </div>
 
                     <h3>
@@ -1550,42 +1370,18 @@
                 <div class="quick-card">
 
                     <div class="quick-icon">
-
-                        <svg id="svgIconTicket"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="40"
-                            height="40"
-                            fill="none">
-
-                            <defs>
-
-                                <linearGradient id="ticketGoldQuick"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#FFE899"/>
-                                    <stop offset="50%" stop-color="#F4D068"/>
-                                    <stop offset="100%" stop-color="#AA771C"/>
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <path d="M 3 8 C 3 6.89 3.89 6 5 6 H 19 C 20.11 6 21 6.89 21 8 C 19.9 8 19 8.9 19 10 C 19 11.1 19.9 12 21 12 C 21 13.1 21 14 21 16 C 21 17.11 20.11 18 19 18 H 5 C 3.89 18 3 17.11 3 16 C 4.1 16 5 15.1 5 14 C 5 12.9 4.1 12 3 12 Z"
-                                fill="url(#ticketGoldQuick)"/>
-
-                            <line x1="9" y1="7"
-                                x2="9" y2="17"
-                                stroke="#124170"
-                                stroke-width="1.5"
-                                stroke-dasharray="2 2"/>
-
-                            <polygon points="14,9 15.2,11.5 18,11.9 16,13.8 16.5,16.5 14,15.2 11.5,16.5 12,13.8 10,11.9 12.8,11.5"
-                                fill="#124170"/>
-
-                        </svg>
-
+                        <svg id="svgIconTicket" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none">
+  <defs>
+    <linearGradient id="ticketGoldQuick" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE899" />
+      <stop offset="50%" stop-color="#F4D068" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+  </defs>
+  <path d="M 3 8 C 3 6.89 3.89 6 5 6 H 19 C 20.11 6 21 6.89 21 8 C 19.9 8 19 8.9 19 10 C 19 11.1 19.9 12 21 12 C 21 13.1 21 14 21 16 C 21 17.11 20.11 18 19 18 H 5 C 3.89 18 3 17.11 3 16 C 4.1 16 5 15.1 5 14 C 5 12.9 4.1 12 3 12 Z" fill="url(#ticketGoldQuick)"/>
+  <line x1="9" y1="7" x2="9" y2="17" stroke="#124170" stroke-width="1.5" stroke-dasharray="2 2"/>
+  <polygon points="14,9 15.2,11.5 18,11.9 16,13.8 16.5,16.5 14,15.2 11.5,16.5 12,13.8 10,11.9 12.8,11.5" fill="#124170"/>
+</svg>
                     </div>
 
                     <h3>
@@ -1659,8 +1455,9 @@
                     class="input"
                     type="text"
                     placeholder="ค้นหาชื่อสนาม..."
-                    oninput="filterCourts"
+                    oninput="filterCourts()"
                 >
+
 
                 <select
                     id="sportFilter"
@@ -1759,56 +1556,26 @@
             <div class="training-layout">
 
 
+                <!-- CREATE PLAN -->
+
                 <div class="panel">
 
                     <h3 style="display:flex; align-items:center; gap:8px;">
-
-                        <svg width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true">
-
-                            <defs>
-
-                                <linearGradient id="addIconGradPlan"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#F4D068"/>
-                                    <stop offset="100%" stop-color="#AA771C"/>
-
-                                </linearGradient>
-
-                                <linearGradient id="addBgGradPlan"
-                                    x1="0%" y1="0%"
-                                    x2="100%" y2="100%">
-
-                                    <stop offset="0%" stop-color="#2B80C5"/>
-                                    <stop offset="100%" stop-color="#124170"/>
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <rect x="2" y="2"
-                                width="20"
-                                height="20"
-                                rx="10"
-                                fill="url(#addBgGradPlan)"
-                                stroke="url(#addIconGradPlan)"
-                                stroke-width="1.5"/>
-
-                            <path d="M12 7V17M7 12H17"
-                                stroke="url(#addIconGradPlan)"
-                                stroke-width="2.5"
-                                stroke-linecap="round"/>
-
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <defs>
+                            <linearGradient id="addIconGradPlan" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#F4D068" />
+                              <stop offset="100%" stop-color="#AA771C" />
+                            </linearGradient>
+                            <linearGradient id="addBgGradPlan" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#2B80C5" />
+                              <stop offset="100%" stop-color="#124170" />
+                            </linearGradient>
+                          </defs>
+                          <rect x="2" y="2" width="20" height="20" rx="10" fill="url(#addBgGradPlan)" stroke="url(#addIconGradPlan)" stroke-width="1.5"/>
+                          <path d="M12 7V17M7 12H17" stroke="url(#addIconGradPlan)" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
-
                         เพิ่มแผนการซ้อม
-
                     </h3>
 
 
@@ -1909,6 +1676,8 @@
 
 
 
+                <!-- PLAN LIST -->
+
                 <div class="panel">
 
                     <h3>
@@ -1962,51 +1731,30 @@
 
             <div class="ticket-wrapper">
 
+
+                <!-- TICKET -->
+
                 <div class="ticket">
+
 
                     <div class="ticket-header">
 
                         <div>
 
                             <h2 style="display:flex; align-items:center; gap:8px;">
-
-                                <svg width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true">
-
-                                    <defs>
-
-                                        <linearGradient id="ticketGoldHeader"
-                                            x1="0%" y1="0%"
-                                            x2="100%" y2="100%">
-
-                                            <stop offset="0%" stop-color="#FFE899"/>
-                                            <stop offset="50%" stop-color="#F4D068"/>
-                                            <stop offset="100%" stop-color="#AA771C"/>
-
-                                        </linearGradient>
-
-                                    </defs>
-
-                                    <path d="M 3 8 C 3 6.89 3.89 6 5 6 H 19 C 20.11 6 21 6.89 21 8 C 19.9 8 19 8.9 19 10 C 19 11.1 19.9 12 21 12 C 21 13.1 21 14 21 16 C 21 17.11 20.11 18 19 18 H 5 C 3.89 18 3 17.11 3 16 C 4.1 16 5 15.1 5 14 C 5 12.9 4.1 12 3 12 Z"
-                                        fill="url(#ticketGoldHeader)"/>
-
-                                    <line x1="9" y1="7"
-                                        x2="9" y2="17"
-                                        stroke="#124170"
-                                        stroke-width="1.5"
-                                        stroke-dasharray="2 2"/>
-
-                                    <polygon points="14,9 15.2,11.5 18,11.9 16,13.8 16.5,16.5 14,15.2 11.5,16.5 12,13.8 10,11.9 12.8,11.5"
-                                        fill="#124170"/>
-
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                  <defs>
+                                    <linearGradient id="ticketGoldHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="#FFE899" />
+                                      <stop offset="50%" stop-color="#F4D068" />
+                                      <stop offset="100%" stop-color="#AA771C" />
+                                    </linearGradient>
+                                  </defs>
+                                  <path d="M 3 8 C 3 6.89 3.89 6 5 6 H 19 C 20.11 6 21 6.89 21 8 C 19.9 8 19 8.9 19 10 C 19 11.1 19.9 12 21 12 C 21 13.1 21 14 21 16 C 21 17.11 20.11 18 19 18 H 5 C 3.89 18 3 17.11 3 16 C 4.1 16 5 15.1 5 14 C 5 12.9 4.1 12 3 12 Z" fill="url(#ticketGoldHeader)"/>
+                                  <line x1="9" y1="7" x2="9" y2="17" stroke="#124170" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                  <polygon points="14,9 15.2,11.5 18,11.9 16,13.8 16.5,16.5 14,15.2 11.5,16.5 12,13.8 10,11.9 12.8,11.5" fill="#124170"/>
                                 </svg>
-
                                 Booking Ticket
-
                             </h2>
 
                             <p>
@@ -2025,100 +1773,38 @@
 
                     <div class="ticket-content">
 
+
                         <div class="ticket-logo">
 
                             <div class="logo-mark"
-                                style="width:42px;height:42px;">
+                                 style="width:42px;height:42px;">
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+        <linearGradient id="goldGradLogo2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f9e8a2"/>
+            <stop offset="50%" stop-color="#c5a059"/>
+            <stop offset="100%" stop-color="#7a5c28"/>
+        </linearGradient>
+        <linearGradient id="blueGradLogo2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2980b9"/>
+            <stop offset="100%" stop-color="#0e2a47"/>
+        </linearGradient>
+    </defs>
+    <circle cx="100" cy="100" r="90" stroke="url(#goldGradLogo2)" stroke-width="4" fill="none"/>
+    <circle cx="100" cy="100" r="82" stroke="url(#blueGradLogo2)" stroke-width="6" fill="none"/>
+    <circle cx="100" cy="100" r="76" stroke="url(#goldGradLogo2)" stroke-width="2" fill="none"/>
+    <path d="M30 100 A70 70 0 0 1 170 100" stroke="#1d426d" stroke-width="1.5" fill="none" stroke-dasharray="4 2"/>
+    <path d="M40 70 A70 70 0 0 1 160 70" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+    <path d="M40 130 A70 70 0 0 0 160 130" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+    <line x1="100" y1="24" x2="100" y2="176" stroke="#1d426d" stroke-width="1.5"/>
+    <line x1="60" y1="30" x2="140" y2="170" stroke="#1d426d" stroke-width="1"/>
+    <line x1="140" y1="30" x2="60" y2="170" stroke="#1d426d" stroke-width="1"/>
+    <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z" fill="url(#blueGradLogo2)" stroke="url(#goldGradLogo2)" stroke-width="3"/>
+    <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z" fill="url(#goldGradLogo2)"/>
+    <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z" fill="#1a6b9c"/>
+    <circle cx="120" cy="72" r="6" fill="url(#goldGradLogo2)"/>
+</svg>
 
-                                <svg viewBox="0 0 200 200"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none">
-
-                                    <defs>
-
-                                        <linearGradient id="goldGradLogo2"
-                                            x1="0%" y1="0%"
-                                            x2="100%" y2="100%">
-
-                                            <stop offset="0%" stop-color="#f9e8a2"/>
-                                            <stop offset="50%" stop-color="#c5a059"/>
-                                            <stop offset="100%" stop-color="#7a5c28"/>
-
-                                        </linearGradient>
-
-                                        <linearGradient id="blueGradLogo2"
-                                            x1="0%" y1="0%"
-                                            x2="0%" y2="100%">
-
-                                            <stop offset="0%" stop-color="#2980b9"/>
-                                            <stop offset="100%" stop-color="#0e2a47"/>
-
-                                        </linearGradient>
-
-                                    </defs>
-
-                                    <circle cx="100" cy="100" r="90"
-                                        stroke="url(#goldGradLogo2)"
-                                        stroke-width="4"
-                                        fill="none"/>
-
-                                    <circle cx="100" cy="100" r="82"
-                                        stroke="url(#blueGradLogo2)"
-                                        stroke-width="6"
-                                        fill="none"/>
-
-                                    <circle cx="100" cy="100" r="76"
-                                        stroke="url(#goldGradLogo2)"
-                                        stroke-width="2"
-                                        fill="none"/>
-
-                                    <path d="M30 100 A70 70 0 0 1 170 100"
-                                        stroke="#1d426d"
-                                        stroke-width="1.5"
-                                        fill="none"
-                                        stroke-dasharray="4 2"/>
-
-                                    <path d="M40 70 A70 70 0 0 1 160 70"
-                                        stroke="#1d426d"
-                                        stroke-width="1.5"
-                                        fill="none"/>
-
-                                    <path d="M40 130 A70 70 0 0 0 160 130"
-                                        stroke="#1d426d"
-                                        stroke-width="1.5"
-                                        fill="none"/>
-
-                                    <line x1="100" y1="24"
-                                        x2="100" y2="176"
-                                        stroke="#1d426d"
-                                        stroke-width="1.5"/>
-
-                                    <line x1="60" y1="30"
-                                        x2="140" y2="170"
-                                        stroke="#1d426d"
-                                        stroke-width="1"/>
-
-                                    <line x1="140" y1="30"
-                                        x2="60" y2="170"
-                                        stroke="#1d426d"
-                                        stroke-width="1"/>
-
-                                    <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z"
-                                        fill="url(#blueGradLogo2)"
-                                        stroke="url(#goldGradLogo2)"
-                                        stroke-width="3"/>
-
-                                    <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z"
-                                        fill="url(#goldGradLogo2)"/>
-
-                                    <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z"
-                                        fill="#1a6b9c"/>
-
-                                    <circle cx="120" cy="72"
-                                        r="6"
-                                        fill="url(#goldGradLogo2)"/>
-
-                                </svg>
 
                             </div>
 
@@ -2129,6 +1815,7 @@
 
 
                         <div class="ticket-details">
+
 
                             <div class="ticket-detail">
 
@@ -2237,66 +1924,24 @@
                             onclick="printTicket()">
 
                             <span style="display:inline-flex; align-items:center; gap:8px;">
-
-                                <svg width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true">
-
-                                    <defs>
-
-                                        <linearGradient id="printGoldTicket"
-                                            x1="0%" y1="0%"
-                                            x2="100%" y2="100%">
-
-                                            <stop offset="0%" stop-color="#F4D068"/>
-                                            <stop offset="100%" stop-color="#AA771C"/>
-
-                                        </linearGradient>
-
-                                        <linearGradient id="printCyanTicket"
-                                            x1="0%" y1="0%"
-                                            x2="100%" y2="100%">
-
-                                            <stop offset="0%" stop-color="#4AD0E8"/>
-                                            <stop offset="100%" stop-color="#2B80C5"/>
-
-                                        </linearGradient>
-
-                                    </defs>
-
-                                    <path d="M7 4H17V9H7V4Z"
-                                        fill="url(#printGoldTicket)"
-                                        opacity="0.9"/>
-
-                                    <path d="M5 9H19 C20.1 9 21 9.9 21 11 V16 C21 17.1 20.1 18 19 18 H18 V15 H6 V18 H5 C3.9 18 3 17.1 3 16 V11 C3 9.9 3.9 9 5 9 Z"
-                                        fill="#FFFFFF"/>
-
-                                    <rect x="7" y="14"
-                                        width="10"
-                                        height="7"
-                                        rx="1"
-                                        fill="url(#printCyanTicket)"
-                                        stroke="url(#printGoldTicket)"
-                                        stroke-width="1"/>
-
-                                    <line x1="9" y1="17"
-                                        x2="15" y2="17"
-                                        stroke="#FFFFFF"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"/>
-
-                                    <circle cx="18"
-                                        cy="12"
-                                        r="1"
-                                        fill="#4AD0E8"/>
-
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                  <defs>
+                                    <linearGradient id="printGoldTicket" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="#F4D068" />
+                                      <stop offset="100%" stop-color="#AA771C" />
+                                    </linearGradient>
+                                    <linearGradient id="printCyanTicket" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="#4AD0E8" />
+                                      <stop offset="100%" stop-color="#2B80C5" />
+                                    </linearGradient>
+                                  </defs>
+                                  <path d="M7 4H17V9H7V4Z" fill="url(#printGoldTicket)" opacity="0.9"/>
+                                  <path d="M5 9H19 C20.1 9 21 9.9 21 11 V16 C21 17.1 20.1 18 19 18 H18 V15 H6 V18 H5 C3.9 18 3 17.1 3 16 V11 C3 9.9 3.9 9 5 9 Z" fill="#FFFFFF"/>
+                                  <rect x="7" y="14" width="10" height="7" rx="1" fill="url(#printCyanTicket)" stroke="url(#printGoldTicket)" stroke-width="1"/>
+                                  <line x1="9" y1="17" x2="15" y2="17" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+                                  <circle cx="18" cy="12" r="1" fill="#4AD0E8"/>
                                 </svg>
-
                                 พิมพ์ตั๋ว
-
                             </span>
 
                         </button>
@@ -2305,6 +1950,12 @@
 
                 </div>
 
+
+
+                <!-- =====================================
+                     GRAPH STRUCTURE
+                     ซ่อนไว้จากหน้าเว็บ
+                ====================================== -->
 
                 <div class="theory-section">
 
@@ -2317,6 +1968,7 @@
                         class="graph-box">
                     </div>
 
+
                     <h4 style="margin-top:25px;">
                         Edges
                     </h4>
@@ -2325,6 +1977,7 @@
                         id="edgeList"
                         class="edge-list">
                     </div>
+
 
                     <h4 style="margin-top:25px;">
                         Adjacency List
@@ -2335,6 +1988,7 @@
                         class="adjacency">
                     </div>
 
+
                     <h4 style="margin-top:25px;">
                         Example Path
                     </h4>
@@ -2343,6 +1997,12 @@
 
                 </div>
 
+
+
+                <!-- =====================================
+                     TREE STRUCTURE
+                     ซ่อนไว้จากหน้าเว็บ
+                ====================================== -->
 
                 <div class="theory-section">
 
@@ -2355,11 +2015,13 @@
                         class="tree">
                     </div>
 
+
                     <h4 style="margin-top:25px;">
                         Tree Path
                     </h4>
 
                     <p id="treePath"></p>
+
 
                     <h4 style="margin-top:25px;">
                         BFS
@@ -2536,6 +2198,7 @@
 
     <script>
 
+
         /* =========================================
            COURT DATA
         ========================================== */
@@ -2605,6 +2268,7 @@
         ];
 
 
+
         /* =========================================
            PAGE NAVIGATION
         ========================================== */
@@ -2669,6 +2333,7 @@
             });
 
         }
+
 
 
         /* =========================================
@@ -2740,6 +2405,7 @@
         }
 
 
+
         /* =========================================
            RENDER ALL COURTS
         ========================================== */
@@ -2755,7 +2421,7 @@
                 container.innerHTML = `
 
                     <div class="empty"
-                        style="grid-column:1/-1;">
+                         style="grid-column:1/-1;">
 
                         ไม่พบสนามที่ค้นหา
 
@@ -2823,6 +2489,7 @@
         }
 
 
+
         /* =========================================
            FILTER COURTS
         ========================================== */
@@ -2881,6 +2548,7 @@
         }
 
 
+
         /* =========================================
            OPEN BOOKING MODAL
         ========================================== */
@@ -2920,6 +2588,7 @@
         }
 
 
+
         /* =========================================
            CLOSE MODAL
         ========================================== */
@@ -2931,6 +2600,7 @@
                 .classList.remove("show");
 
         }
+
 
 
         /* =========================================
@@ -3030,6 +2700,7 @@
         }
 
 
+
         /* =========================================
            TOAST
         ========================================== */
@@ -3056,6 +2727,7 @@
             }, 2500);
 
         }
+
 
 
         /* =========================================
@@ -3140,6 +2812,7 @@
         }
 
 
+
         function renderTrainingPlans() {
 
             const container =
@@ -3207,6 +2880,7 @@
         }
 
 
+
         function deleteTrainingPlan(id) {
 
             trainingPlans =
@@ -3225,8 +2899,13 @@
         }
 
 
+
         /* =========================================
            GRAPH THEORY
+           
+           6 VERTICES
+           8 UNIQUE EDGES
+           ADJACENCY LIST
         ========================================== */
 
         const sportGraph = {
@@ -3268,6 +2947,11 @@
         };
 
 
+
+        /* =========================================
+           GET UNIQUE EDGES
+        ========================================== */
+
         function getUniqueEdges(graph) {
 
             const edges = [];
@@ -3308,6 +2992,11 @@
 
         }
 
+
+
+        /* =========================================
+           FIND PATH IN GRAPH
+        ========================================== */
 
         function findPath(
             graph,
@@ -3364,8 +3053,15 @@
         }
 
 
+
         /* =========================================
            BOOKING TREE
+           
+           ROOT
+           PARENT
+           CHILD
+           LEAF
+           4 LEVELS
         ========================================== */
 
         const bookingTree = {
@@ -3398,6 +3094,7 @@
 
                         },
 
+
                         {
 
                             name: "บาสเกตบอล",
@@ -3411,6 +3108,7 @@
                             ]
 
                         },
+
 
                         {
 
@@ -3433,6 +3131,7 @@
             ]
 
         };
+
 
 
         /* =========================================
@@ -3474,8 +3173,10 @@
         }
 
 
+
         /* =========================================
            RENDER GRAPH
+           (ยังทำงานในระบบ แม้ถูกซ่อน)
         ========================================== */
 
         function renderGraph() {
@@ -3568,6 +3269,7 @@
         }
 
 
+
         /* =========================================
            RENDER TREE
         ========================================== */
@@ -3611,6 +3313,7 @@
             }
 
         }
+
 
 
         /* =========================================
@@ -3664,6 +3367,7 @@
         }
 
 
+
         /* =========================================
            PRINT TICKET
         ========================================== */
@@ -3701,8 +3405,8 @@
 
                         body {
                             font-family:
-                                "Itim",
-                                cursive;
+                                Arial,
+                                sans-serif;
 
                             padding: 40px;
 
@@ -3828,6 +3532,7 @@
         }
 
 
+
         /* =========================================
            CLOSE MODAL WHEN CLICK OUTSIDE
         ========================================== */
@@ -3850,6 +3555,7 @@
             );
 
 
+
         /* =========================================
            INITIALIZE WEBSITE
         ========================================== */
@@ -3864,8 +3570,8 @@
 
         initTree();
 
+
     </script>
 
 </body>
 </html>
-```
