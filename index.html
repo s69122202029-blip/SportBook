@@ -966,6 +966,7 @@
 
 
 
+
         /* =========================================
            TOAST
         ========================================= */
@@ -1996,6 +1997,20 @@
 
                         </button>
 
+                        <button
+                            class="btn btn-outline"
+                            style="width:100%; margin-top:10px;"
+                            onclick="cancelLatestBooking()">
+                            ↩️ ยกเลิกการจองล่าสุด
+                        </button>
+
+                        <button
+                            class="btn btn-outline"
+                            style="width:100%; margin-top:10px;"
+                            onclick="clearAllBookings()">
+                            🗑️ ล้างการจองทั้งหมด
+                        </button>
+
                     </div>
 
                 </div>
@@ -2668,6 +2683,10 @@
         let reviews = JSON.parse(localStorage.getItem("sportbookReviews") || "{}");
 
 
+        /* =========================================
+           REVIEW SYSTEM
+        ========================================== */
+
         function openReview(courtId) {
             selectedReviewCourt = courts.find(court => court.id === courtId);
             if (!selectedReviewCourt) return;
@@ -2719,6 +2738,7 @@
                 text,
                 date: new Date().toLocaleDateString("th-TH")
             });
+
             localStorage.setItem("sportbookReviews", JSON.stringify(reviews));
 
             const list = reviews[selectedReviewCourt.id];
@@ -2730,7 +2750,6 @@
             filterCourts();
             showToast("ส่งรีวิวเรียบร้อยแล้ว ⭐ ขอบคุณสำหรับความคิดเห็น");
         }
-
 
 
         function openBooking(courtId) {
@@ -2750,17 +2769,15 @@
                 selectedCourt.name;
 
 
-            document.getElementById(
-                "modalDate"
-            ).value =
-                new Date()
-                .toISOString()
-                .split("T")[0];
+            const today = new Date().toISOString().split("T")[0];
 
+            const dateInput = document.getElementById("modalDate");
+            dateInput.min = today;
+            dateInput.value = today;
 
-            document
-                .getElementById("bookingModal")
-                .classList.add("show");
+            document.getElementById("bookingModal").classList.add("show");
+
+            setTimeout(() => dateInput.focus(), 50);
 
         }
 
@@ -2771,11 +2788,8 @@
         ========================================== */
 
         function closeModal() {
-
-            document
-                .getElementById("bookingModal")
-                .classList.remove("show");
-
+            document.getElementById("bookingModal").classList.remove("show");
+            selectedCourt = null;
         }
 
 
@@ -2822,13 +2836,7 @@
             bookings.push(booking);
             localStorage.setItem("sportbookBookings", JSON.stringify(bookings));
 
-            document.getElementById("ticketId").textContent = booking.id;
-            document.getElementById("ticketSport").textContent = booking.sport;
-            document.getElementById("ticketCourt").textContent = booking.court;
-            document.getElementById("ticketDate").textContent = ticketDate;
-            document.getElementById("ticketTime").textContent = booking.time;
-            document.getElementById("ticketLocation").textContent = booking.location;
-            document.getElementById("ticketPrice").textContent = "฿" + booking.price;
+            renderTicket(booking);
 
             closeModal();
             showPage("ticket");
@@ -2869,7 +2877,7 @@
            TRAINING PLANS
         ========================================== */
 
-        let trainingPlans = [];
+        let trainingPlans = JSON.parse(localStorage.getItem("sportbookTrainingPlans") || "[]");
 
 
         function addTrainingPlan() {
@@ -2910,20 +2918,14 @@
 
 
             trainingPlans.push({
-
                 id: Date.now(),
-
                 name,
-
                 sport,
-
                 date,
-
                 time
-
             });
 
-
+            localStorage.setItem("sportbookTrainingPlans", JSON.stringify(trainingPlans));
             renderTrainingPlans();
 
 
@@ -3018,12 +3020,11 @@
 
         function deleteTrainingPlan(id) {
 
-            trainingPlans =
-                trainingPlans.filter(
-                    plan => plan.id !== id
-                );
+            trainingPlans = trainingPlans.filter(
+                plan => plan.id !== id
+            );
 
-
+            localStorage.setItem("sportbookTrainingPlans", JSON.stringify(trainingPlans));
             renderTrainingPlans();
 
 
@@ -3504,6 +3505,85 @@
 
 
         /* =========================================
+           TICKET HELPERS
+        ========================================== */
+
+        function renderTicket(booking) {
+            if (!booking) {
+                document.getElementById("ticketId").textContent = "-";
+                document.getElementById("ticketSport").textContent = "-";
+                document.getElementById("ticketCourt").textContent = "-";
+                document.getElementById("ticketDate").textContent = "-";
+                document.getElementById("ticketTime").textContent = "-";
+                document.getElementById("ticketLocation").textContent = "-";
+                document.getElementById("ticketPrice").textContent = "฿0";
+                return;
+            }
+
+            document.getElementById("ticketId").textContent = booking.id || "-";
+            document.getElementById("ticketSport").textContent = booking.sport || "-";
+            document.getElementById("ticketCourt").textContent = booking.court || "-";
+            document.getElementById("ticketDate").textContent = booking.date
+                ? new Date(booking.date + "T00:00:00").toLocaleDateString("th-TH")
+                : "-";
+            document.getElementById("ticketTime").textContent = booking.time || "-";
+            document.getElementById("ticketLocation").textContent = booking.location || "-";
+            document.getElementById("ticketPrice").textContent = "฿" + (booking.price ?? 0);
+        }
+
+        function loadLatestBooking() {
+            const latest = bookings.length ? bookings[bookings.length - 1] : null;
+            renderTicket(latest);
+        }
+
+        function cancelLatestBooking() {
+            if (bookings.length === 0) {
+                showToast("ยังไม่มีการจองให้ยกเลิกค่ะ");
+                return;
+            }
+
+            const latest = bookings[bookings.length - 1];
+            const confirmed = confirm(
+                `ต้องการยกเลิกการจอง ${latest.id}\n${latest.court} | ${latest.date} | ${latest.time} ใช่ไหม?`
+            );
+
+            if (!confirmed) return;
+
+            bookings.pop();
+            localStorage.setItem("sportbookBookings", JSON.stringify(bookings));
+            loadLatestBooking();
+            showToast("ยกเลิกการจองล่าสุดเรียบร้อยแล้ว ↩️");
+        }
+
+
+        /* =========================================
+           CLEAR ALL BOOKINGS
+        ========================================== */
+
+        function clearAllBookings() {
+
+            if (bookings.length === 0) {
+                showToast("ยังไม่มีการจองให้ล้างค่ะ");
+                return;
+            }
+
+            const confirmed = confirm(
+                "ต้องการล้างการจองทั้งหมดใช่ไหม?\nการจองที่บันทึกไว้จะถูกลบและสามารถจองใหม่ได้"
+            );
+
+            if (!confirmed) return;
+
+            bookings = [];
+
+            localStorage.removeItem("sportbookBookings");
+
+            renderTicket(null);
+
+            showToast("ล้างการจองทั้งหมดเรียบร้อยแล้ว 🗑️");
+        }
+
+
+        /* =========================================
            PRINT TICKET
         ========================================== */
 
@@ -3515,12 +3595,18 @@
                 );
 
 
-            const printWindow =
-                window.open(
-                    "",
-                    "_blank"
-                );
+            const printWindow = window.open("", "_blank");
 
+            if (!printWindow) {
+                showToast("เบราว์เซอร์บล็อกหน้าต่างพิมพ์ กรุณาอนุญาต Pop-up ก่อนค่ะ");
+                return;
+            }
+
+            if (document.getElementById("ticketId").textContent.trim() === "-") {
+                printWindow.close();
+                showToast("ยังไม่มีตั๋วการจองให้พิมพ์ค่ะ");
+                return;
+            }
 
             printWindow.document.write(`
 
@@ -3690,6 +3776,23 @@
             );
 
 
+        document
+            .getElementById("reviewModal")
+            .addEventListener(
+                "click",
+                function(event) {
+                    if (event.target === this) closeReview();
+                }
+            );
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+                closeReview();
+            }
+        });
+
+
 
         /* =========================================
            INITIALIZE WEBSITE
@@ -3700,6 +3803,7 @@
         renderCourts();
 
         renderTrainingPlans();
+        loadLatestBooking();
 
         renderGraph();
 
