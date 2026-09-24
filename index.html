@@ -889,24 +889,19 @@
 
 
         /* =========================================
-           MODAL
-        ========================================= */
+           MODERN BOOKING MODAL
+        ========================================== */
 
         .modal {
             position: fixed;
-
             inset: 0;
-
-            background:
-                rgba(7, 26, 51, 0.65);
-
+            background: rgba(7, 26, 51, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: none;
-
             align-items: center;
             justify-content: center;
-
             z-index: 2000;
-
             padding: 20px;
         }
 
@@ -914,57 +909,287 @@
             display: flex;
         }
 
-        .modal-content {
+        .booking-modal-content {
             width: 100%;
-            max-width: 500px;
-
+            max-width: 560px;
+            max-height: 92vh;
+            overflow-y: auto;
             background: #CFE0EB;
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.25);
-
-            animation: modalIn 0.25s ease;
+            border-radius: 26px;
+            box-shadow: 0 35px 100px rgba(0, 0, 0, 0.35);
+            animation: modalIn 0.28s ease;
+            border: 1px solid rgba(255,255,255,0.65);
         }
 
         @keyframes modalIn {
             from {
                 opacity: 0;
-                transform: translateY(20px) scale(0.98);
+                transform: translateY(25px) scale(0.96);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        .modal-header {
+        .booking-modal-header {
+            position: relative;
+            padding: 28px 28px 24px;
+            color: white;
+            background: linear-gradient(135deg, #071A33 0%, #0B2447 58%, #1769E0 100%);
+            overflow: hidden;
+        }
+
+        .booking-modal-header::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            right: -70px;
+            top: -90px;
+            border-radius: 50%;
+            background: rgba(0,198,255,0.16);
+        }
+
+        .booking-modal-title-row {
+            position: relative;
+            z-index: 1;
             display: flex;
-
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
 
+        .booking-title-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #F4D068, #AA771C);
+            color: #071A33;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+        }
+
+        .booking-modal-title {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .booking-modal-title h3 {
+            font-size: 23px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .booking-modal-title p {
+            margin: 4px 0 0;
+            color: #C8D9EE;
+            font-size: 13px;
+        }
+
+        .booking-close {
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.10);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            font-size: 22px;
+            transition: 0.2s;
+        }
+
+        .booking-close:hover {
+            background: rgba(255,255,255,0.20);
+            transform: rotate(4deg) scale(1.04);
+        }
+
+        .booking-modal-body {
+            padding: 24px 28px 28px;
+        }
+
+        .booking-court-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.62);
+            border: 1px solid rgba(255,255,255,0.85);
+            box-shadow: 0 8px 20px rgba(7,26,51,0.07);
+        }
+
+        .booking-court-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #EAF3FF;
+            font-size: 23px;
+            flex-shrink: 0;
+        }
+
+        .booking-court-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .booking-court-info strong {
+            display: block;
+            color: var(--navy);
+            font-size: 17px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .booking-court-info span {
+            display: block;
+            color: var(--gray);
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .booking-price-badge {
+            padding: 7px 10px;
+            border-radius: 10px;
+            background: #EAF3FF;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .booking-step-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .booking-step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            font-size: 12px;
+        }
+
+        .booking-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
             margin-bottom: 20px;
         }
 
-        .close {
-            border: none;
-
-            background: #F1F5F9;
-
-            width: 35px;
-            height: 35px;
-
-            border-radius: 50%;
-
-            font-size: 20px;
+        .booking-field {
+            padding: 14px;
+            background: rgba(255,255,255,0.50);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 14px;
         }
 
+        .booking-field .field-label {
+            display: block;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
 
+        .booking-field .input,
+        .booking-field .select {
+            background: rgba(255,255,255,0.78);
+            border-color: #D5E0EA;
+            font-weight: 500;
+        }
+
+        .booking-summary {
+            margin-top: 4px;
+            padding: 17px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(234,243,255,0.92), rgba(255,255,255,0.60));
+            border: 1px solid rgba(23,105,224,0.15);
+        }
+
+        .booking-summary-title {
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .booking-summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .booking-summary-row span:first-child {
+            color: var(--gray);
+        }
+
+        .booking-summary-row strong {
+            color: var(--navy);
+            text-align: right;
+        }
+
+        .booking-confirm-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 15px 20px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .booking-cancel-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px 20px;
+            border-radius: 14px;
+            background: transparent;
+            border: 1px solid #CBD5E1;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .booking-cancel-btn:hover {
+            background: #F8FAFC;
+        }
+
+        @media (max-width: 600px) {
+            .booking-modal-body {
+                padding: 20px;
+            }
+
+            .booking-modal-header {
+                padding: 22px 20px;
+            }
+
+            .booking-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-price-badge {
+                display: none;
+            }
+        }
 
 
         /* =========================================
@@ -2128,119 +2353,103 @@
 
 
     <!-- =========================================
-         BOOKING MODAL
+         MODERN BOOKING MODAL
     ========================================== -->
 
-    <div
-        id="bookingModal"
-        class="modal">
+    <div id="bookingModal" class="modal" aria-hidden="true">
 
-        <div class="modal-content">
+        <div class="booking-modal-content">
 
-            <div class="modal-header">
+            <div class="booking-modal-header">
+                <div class="booking-modal-title-row">
+                    <div class="booking-modal-title">
+                        <div class="booking-title-icon">
+                            <span style="font-size:24px;">🏟️</span>
+                        </div>
+                        <div>
+                            <h3>ยืนยันการจองสนาม</h3>
+                            <p>เลือกวันและเวลาที่ต้องการ แล้วตรวจสอบข้อมูลก่อนยืนยัน</p>
+                        </div>
+                    </div>
 
-                <h3>
-                    จองสนาม
-                </h3>
+                    <button class="booking-close" type="button" onclick="closeModal()" aria-label="ปิด">×</button>
+                </div>
+            </div>
 
-                <button
-                    class="close"
-                    onclick="closeModal()">
+            <div class="booking-modal-body">
 
-                    ×
+                <div class="booking-court-card">
+                    <div class="booking-court-icon" id="modalSportIcon">⚽</div>
+                    <div class="booking-court-info">
+                        <strong id="modalCourtDisplay">Sport Arena A</strong>
+                        <span id="modalLocationDisplay">📍 เขตบางเขน</span>
+                    </div>
+                    <div class="booking-price-badge" id="modalPriceDisplay">฿350/ชม.</div>
+                </div>
 
+                <div class="booking-step-label">
+                    <span class="booking-step-number">1</span>
+                    เลือกวันและเวลา
+                </div>
+
+                <div class="booking-fields">
+                    <div class="booking-field">
+                        <span class="field-label">📅 วันที่จอง</span>
+                        <input id="modalDate" class="input" type="date" onchange="updateBookingSummary()">
+                    </div>
+
+                    <div class="booking-field">
+                        <span class="field-label">🕐 เวลา</span>
+                        <select id="modalTime" class="select" onchange="updateBookingSummary()">
+                            <option>09:00 - 10:00</option>
+                            <option>10:00 - 11:00</option>
+                            <option>13:00 - 14:00</option>
+                            <option>15:00 - 16:00</option>
+                            <option>17:00 - 18:00</option>
+                            <option>18:00 - 19:00</option>
+                            <option>19:00 - 20:00</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- เก็บ ID เดิมไว้เพื่อให้ระบบเดิมทำงานได้ -->
+                <input id="modalCourt" type="hidden">
+
+                <div class="booking-summary">
+                    <div class="booking-summary-title">✨ สรุปรายการจอง</div>
+                    <div class="booking-summary-row">
+                        <span>สนาม</span>
+                        <strong id="summaryCourt">-</strong>
+                    </div>
+                    <div class="booking-summary-row">
+                        <span>ประเภทกีฬา</span>
+                        <strong id="summarySport">-</strong>
+                    </div>
+                    <div class="booking-summary-row">
+                        <span>วันที่</span>
+                        <strong id="summaryDate">-</strong>
+                    </div>
+                    <div class="booking-summary-row">
+                        <span>เวลา</span>
+                        <strong id="summaryTime">-</strong>
+                    </div>
+                    <div class="booking-summary-row">
+                        <span>สถานที่</span>
+                        <strong id="summaryLocation">-</strong>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary booking-confirm-btn" type="button" onclick="confirmBooking()">
+                    ✓ ยืนยันการจอง
+                </button>
+
+                <button class="booking-cancel-btn" type="button" onclick="closeModal()">
+                    ยกเลิก
                 </button>
 
             </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    สนาม
-                </label>
-
-                <input
-                    id="modalCourt"
-                    class="input"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    วันที่
-                </label>
-
-                <input
-                    id="modalDate"
-                    class="input"
-                    type="date"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    เวลา
-                </label>
-
-                <select
-                    id="modalTime"
-                    class="select">
-
-                    <option>
-                        09:00 - 10:00
-                    </option>
-
-                    <option>
-                        10:00 - 11:00
-                    </option>
-
-                    <option>
-                        13:00 - 14:00
-                    </option>
-
-                    <option>
-                        15:00 - 16:00
-                    </option>
-
-                    <option>
-                        17:00 - 18:00
-                    </option>
-
-                    <option>
-                        18:00 - 19:00
-                    </option>
-
-                    <option>
-                        19:00 - 20:00
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button
-                class="btn btn-primary"
-                style="width:100%;"
-                onclick="confirmBooking()">
-
-                ยืนยันการจอง
-
-            </button>
-
         </div>
-
     </div>
-
 
 
     <!-- =========================================
@@ -2775,12 +2984,51 @@
             dateInput.min = today;
             dateInput.value = today;
 
+            // แสดงข้อมูลสนามในหน้าต่างยืนยันแบบใหม่
+            document.getElementById("modalCourtDisplay").textContent = selectedCourt.name;
+            document.getElementById("modalLocationDisplay").textContent = "📍 " + selectedCourt.location;
+            document.getElementById("modalPriceDisplay").textContent = "฿" + selectedCourt.price + "/ชม.";
+            document.getElementById("modalSportIcon").textContent = getSportIcon(selectedCourt.sport);
+            updateBookingSummary();
+
             document.getElementById("bookingModal").classList.add("show");
 
             setTimeout(() => dateInput.focus(), 50);
 
         }
 
+
+
+        function getSportIcon(sport) {
+            const icons = {
+                "ฟุตบอล": "⚽",
+                "บาสเกตบอล": "🏀",
+                "แบดมินตัน": "🏸",
+                "เทนนิส": "🎾",
+                "วอลเลย์บอล": "🏐",
+                "ฟุตซอล": "⚽"
+            };
+            return icons[sport] || "🏟️";
+        }
+
+        function updateBookingSummary() {
+            if (!selectedCourt) return;
+
+            const date = document.getElementById("modalDate").value;
+            const time = document.getElementById("modalTime").value;
+
+            document.getElementById("summaryCourt").textContent = selectedCourt.name;
+            document.getElementById("summarySport").textContent = selectedCourt.sport;
+            document.getElementById("summaryDate").textContent = date
+                ? new Date(date + "T00:00:00").toLocaleDateString("th-TH", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                })
+                : "-";
+            document.getElementById("summaryTime").textContent = time || "-";
+            document.getElementById("summaryLocation").textContent = selectedCourt.location;
+        }
 
 
         /* =========================================
