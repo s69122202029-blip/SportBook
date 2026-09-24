@@ -3842,6 +3842,12 @@
                     ".ticket"
                 );
 
+            // สร้างสำเนาสำหรับหน้าพิมพ์เท่านั้น
+            // ปุ่มต่าง ๆ จะยังอยู่บนหน้าเว็บตามปกติ
+            const printTicketElement = ticket.cloneNode(true);
+            printTicketElement.querySelectorAll("button").forEach(button => {
+                button.remove();
+            });
 
             const printWindow = window.open("", "_blank");
 
@@ -3977,7 +3983,7 @@
 
                 <body>
 
-                    ${ticket.outerHTML}
+                    ${printTicketElement.outerHTML}
 
                 </body>
 
