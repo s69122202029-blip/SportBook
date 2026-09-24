@@ -671,6 +671,18 @@
             margin: auto;
         }
 
+        .ticket-list {
+            display: grid;
+            gap: 24px;
+        }
+
+        .ticket-count {
+            margin-bottom: 18px;
+            color: var(--gray);
+            font-size: 14px;
+            text-align: center;
+        }
+
         .ticket {
             background: #CFE0EB;
 
@@ -2007,238 +2019,27 @@
 
             <div class="ticket-wrapper">
 
-
-                <!-- TICKET -->
-
-                <div class="ticket">
-
-
-                    <div class="ticket-header">
-
-                        <div>
-
-                            <h2 style="display:flex; align-items:center; gap:8px;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                  <defs>
-                                    <linearGradient id="ticketGoldHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-                                      <stop offset="0%" stop-color="#FFE899" />
-                                      <stop offset="50%" stop-color="#F4D068" />
-                                      <stop offset="100%" stop-color="#AA771C" />
-                                    </linearGradient>
-                                  </defs>
-                                  <path d="M 3 8 C 3 6.89 3.89 6 5 6 H 19 C 20.11 6 21 6.89 21 8 C 19.9 8 19 8.9 19 10 C 19 11.1 19.9 12 21 12 C 21 13.1 21 14 21 16 C 21 17.11 20.11 18 19 18 H 5 C 3.89 18 3 17.11 3 16 C 4.1 16 5 15.1 5 14 C 5 12.9 4.1 12 3 12 Z" fill="url(#ticketGoldHeader)"/>
-                                  <line x1="9" y1="7" x2="9" y2="17" stroke="#124170" stroke-width="1.5" stroke-dasharray="2 2"/>
-                                  <polygon points="14,9 15.2,11.5 18,11.9 16,13.8 16.5,16.5 14,15.2 11.5,16.5 12,13.8 10,11.9 12.8,11.5" fill="#124170"/>
-                                </svg>
-                                Booking Ticket
-                            </h2>
-
-                            <p>
-                                SportBook
-                            </p>
-
-                        </div>
-
-                        <div class="ticket-status">
-                            จองสำเร็จ
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="ticket-content">
-
-
-                        <div class="ticket-logo">
-
-                            <div class="logo-mark"
-                                 style="width:42px;height:42px;">
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <defs>
-        <linearGradient id="goldGradLogo2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f9e8a2"/>
-            <stop offset="50%" stop-color="#c5a059"/>
-            <stop offset="100%" stop-color="#7a5c28"/>
-        </linearGradient>
-        <linearGradient id="blueGradLogo2" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#2980b9"/>
-            <stop offset="100%" stop-color="#0e2a47"/>
-        </linearGradient>
-    </defs>
-    <circle cx="100" cy="100" r="90" stroke="url(#goldGradLogo2)" stroke-width="4" fill="none"/>
-    <circle cx="100" cy="100" r="82" stroke="url(#blueGradLogo2)" stroke-width="6" fill="none"/>
-    <circle cx="100" cy="100" r="76" stroke="url(#goldGradLogo2)" stroke-width="2" fill="none"/>
-    <path d="M30 100 A70 70 0 0 1 170 100" stroke="#1d426d" stroke-width="1.5" fill="none" stroke-dasharray="4 2"/>
-    <path d="M40 70 A70 70 0 0 1 160 70" stroke="#1d426d" stroke-width="1.5" fill="none"/>
-    <path d="M40 130 A70 70 0 0 0 160 130" stroke="#1d426d" stroke-width="1.5" fill="none"/>
-    <line x1="100" y1="24" x2="100" y2="176" stroke="#1d426d" stroke-width="1.5"/>
-    <line x1="60" y1="30" x2="140" y2="170" stroke="#1d426d" stroke-width="1"/>
-    <line x1="140" y1="30" x2="60" y2="170" stroke="#1d426d" stroke-width="1"/>
-    <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z" fill="url(#blueGradLogo2)" stroke="url(#goldGradLogo2)" stroke-width="3"/>
-    <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z" fill="url(#goldGradLogo2)"/>
-    <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z" fill="#1a6b9c"/>
-    <circle cx="120" cy="72" r="6" fill="url(#goldGradLogo2)"/>
-</svg>
-
-
-                            </div>
-
-                            SportBook
-
-                        </div>
-
-
-
-                        <div class="ticket-details">
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    หมายเลขการจอง
-                                </span>
-
-                                <strong id="ticketId">
-                                    SB-20260922-001
-                                </strong>
-
-                            </div>
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    ประเภทกีฬา
-                                </span>
-
-                                <strong id="ticketSport">
-                                    ฟุตบอล
-                                </strong>
-
-                            </div>
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    สนาม
-                                </span>
-
-                                <strong id="ticketCourt">
-                                    Sport Arena A
-                                </strong>
-
-                            </div>
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    วันที่
-                                </span>
-
-                                <strong id="ticketDate">
-                                    22/09/2026
-                                </strong>
-
-                            </div>
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    เวลา
-                                </span>
-
-                                <strong id="ticketTime">
-                                    18:00 - 19:00
-                                </strong>
-
-                            </div>
-
-
-                            <div class="ticket-detail">
-
-                                <span>
-                                    สถานที่
-                                </span>
-
-                                <strong id="ticketLocation">
-                                    Samut Prakan
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="ticket-total">
-
-                            <div>
-
-                                <span>
-                                    ราคาทั้งหมด
-                                </span>
-
-                            </div>
-
-                            <strong id="ticketPrice">
-                                ฿350
-                            </strong>
-
-                        </div>
-
-
-
-                        <br>
-
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="printTicket()">
-
-                            <span style="display:inline-flex; align-items:center; gap:8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                  <defs>
-                                    <linearGradient id="printGoldTicket" x1="0%" y1="0%" x2="100%" y2="100%">
-                                      <stop offset="0%" stop-color="#F4D068" />
-                                      <stop offset="100%" stop-color="#AA771C" />
-                                    </linearGradient>
-                                    <linearGradient id="printCyanTicket" x1="0%" y1="0%" x2="100%" y2="100%">
-                                      <stop offset="0%" stop-color="#4AD0E8" />
-                                      <stop offset="100%" stop-color="#2B80C5" />
-                                    </linearGradient>
-                                  </defs>
-                                  <path d="M7 4H17V9H7V4Z" fill="url(#printGoldTicket)" opacity="0.9"/>
-                                  <path d="M5 9H19 C20.1 9 21 9.9 21 11 V16 C21 17.1 20.1 18 19 18 H18 V15 H6 V18 H5 C3.9 18 3 17.1 3 16 V11 C3 9.9 3.9 9 5 9 Z" fill="#FFFFFF"/>
-                                  <rect x="7" y="14" width="10" height="7" rx="1" fill="url(#printCyanTicket)" stroke="url(#printGoldTicket)" stroke-width="1"/>
-                                  <line x1="9" y1="17" x2="15" y2="17" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
-                                  <circle cx="18" cy="12" r="1" fill="#4AD0E8"/>
-                                </svg>
-                                พิมพ์ตั๋ว
-                            </span>
-
-                        </button>
-
-                        <button
-                            class="btn btn-outline"
-                            style="width:100%; margin-top:10px;"
-                            onclick="cancelLatestBooking()">
-                            ↩️ ยกเลิกการจองล่าสุด
-                        </button>
-
-                        <button
-                            class="btn btn-outline"
-                            style="width:100%; margin-top:10px;"
-                            onclick="clearAllBookings()">
-                            🗑️ ล้างการจองทั้งหมด
-                        </button>
-
-                    </div>
-
+                <!-- รายการตั๋วทั้งหมดจะแสดงตรงนี้ -->
+                <div id="ticketList" class="ticket-list"></div>
+
+                <!-- ปุ่มจัดการการจองยังอยู่บนหน้าเว็บ -->
+                <div id="ticketActions" style="margin-top:24px; display:none;">
+                    <button
+                        class="btn btn-outline"
+                        style="width:100%;"
+                        onclick="cancelLatestBooking()">
+                        ↩️ ยกเลิกการจองล่าสุด
+                    </button>
+
+                    <button
+                        class="btn btn-outline"
+                        style="width:100%; margin-top:10px;"
+                        onclick="clearAllBookings()">
+                        🗑️ ล้างการจองทั้งหมด
+                    </button>
                 </div>
+
+            </div>
 
 
 
@@ -3084,7 +2885,7 @@
             bookings.push(booking);
             localStorage.setItem("sportbookBookings", JSON.stringify(bookings));
 
-            renderTicket(booking);
+            renderTicketList();
 
             closeModal();
             showPage("ticket");
@@ -3754,34 +3555,165 @@
 
         /* =========================================
            TICKET HELPERS
+           แสดงตั๋วได้หลายใบ
         ========================================== */
 
-        function renderTicket(booking) {
-            if (!booking) {
-                document.getElementById("ticketId").textContent = "-";
-                document.getElementById("ticketSport").textContent = "-";
-                document.getElementById("ticketCourt").textContent = "-";
-                document.getElementById("ticketDate").textContent = "-";
-                document.getElementById("ticketTime").textContent = "-";
-                document.getElementById("ticketLocation").textContent = "-";
-                document.getElementById("ticketPrice").textContent = "฿0";
+        function escapeHTML(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatTicketDate(date) {
+            if (!date) return "-";
+            return new Date(date + "T00:00:00").toLocaleDateString("th-TH");
+        }
+
+        function renderTicketList() {
+            const container = document.getElementById("ticketList");
+            const actions = document.getElementById("ticketActions");
+
+            if (!container) return;
+
+            if (bookings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty">
+                        🎫 ยังไม่มีตั๋วการจอง
+                        <br>
+                        <span style="font-size:14px;">
+                            เมื่อจองสนามสำเร็จ ตั๋วของคุณจะแสดงที่นี่
+                        </span>
+                    </div>
+                `;
+
+                if (actions) actions.style.display = "none";
                 return;
             }
 
-            document.getElementById("ticketId").textContent = booking.id || "-";
-            document.getElementById("ticketSport").textContent = booking.sport || "-";
-            document.getElementById("ticketCourt").textContent = booking.court || "-";
-            document.getElementById("ticketDate").textContent = booking.date
-                ? new Date(booking.date + "T00:00:00").toLocaleDateString("th-TH")
-                : "-";
-            document.getElementById("ticketTime").textContent = booking.time || "-";
-            document.getElementById("ticketLocation").textContent = booking.location || "-";
-            document.getElementById("ticketPrice").textContent = "฿" + (booking.price ?? 0);
+            if (actions) actions.style.display = "block";
+
+            container.innerHTML = `
+                <div class="ticket-count">
+                    🎫 มีตั๋วการจองทั้งหมด <strong>${bookings.length}</strong> ใบ
+                </div>
+
+                ${bookings.map((booking, index) => `
+                    <div class="ticket" data-booking-id="${escapeHTML(booking.id)}">
+
+                        <div class="ticket-header">
+                            <div>
+                                <h2 style="display:flex; align-items:center; gap:8px;">
+                                    <span style="font-size:24px;">🎫</span>
+                                    Booking Ticket
+                                </h2>
+                                <p>SportBook • ใบที่ ${index + 1}</p>
+                            </div>
+
+                            <div class="ticket-status">
+                                จองสำเร็จ
+                            </div>
+                        </div>
+
+                        <div class="ticket-content">
+
+                            <div class="ticket-logo">
+                                <div
+                                    class="logo-mark"
+                                    style="width:42px;height:42px;">
+                                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                        <defs>
+                                            <linearGradient id="goldGradPrint${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#f9e8a2"/>
+                                                <stop offset="50%" stop-color="#c5a059"/>
+                                                <stop offset="100%" stop-color="#7a5c28"/>
+                                            </linearGradient>
+                                            <linearGradient id="blueGradPrint${index}" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" stop-color="#2980b9"/>
+                                                <stop offset="100%" stop-color="#0e2a47"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="100" cy="100" r="90" stroke="url(#goldGradPrint${index})" stroke-width="4" fill="none"/>
+                                        <circle cx="100" cy="100" r="82" stroke="url(#blueGradPrint${index})" stroke-width="6" fill="none"/>
+                                        <circle cx="100" cy="100" r="76" stroke="url(#goldGradPrint${index})" stroke-width="2" fill="none"/>
+                                        <path d="M30 100 A70 70 0 0 1 170 100" stroke="#1d426d" stroke-width="1.5" fill="none" stroke-dasharray="4 2"/>
+                                        <path d="M40 70 A70 70 0 0 1 160 70" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+                                        <path d="M40 130 A70 70 0 0 0 160 130" stroke="#1d426d" stroke-width="1.5" fill="none"/>
+                                        <line x1="100" y1="24" x2="100" y2="176" stroke="#1d426d" stroke-width="1.5"/>
+                                        <line x1="60" y1="30" x2="140" y2="170" stroke="#1d426d" stroke-width="1"/>
+                                        <line x1="140" y1="30" x2="60" y2="170" stroke="#1d426d" stroke-width="1"/>
+                                        <path d="M65 60 L135 60 L135 110 C135 140 100 155 100 155 C100 155 65 140 65 110 Z" fill="url(#blueGradPrint${index})" stroke="url(#goldGradPrint${index})" stroke-width="3"/>
+                                        <path d="M75 125 C80 90 100 70 130 65 C110 85 105 105 125 130 C105 120 90 135 75 125 Z" fill="url(#goldGradPrint${index})"/>
+                                        <path d="M85 75 C100 80 110 95 105 120 C95 100 85 90 85 75 Z" fill="#1a6b9c"/>
+                                        <circle cx="120" cy="72" r="6" fill="url(#goldGradPrint${index})"/>
+                                    </svg>
+                                </div>
+                                SportBook
+                            </div>
+
+                            <div class="ticket-details">
+                                <div class="ticket-detail">
+                                    <span>หมายเลขการจอง</span>
+                                    <strong>${escapeHTML(booking.id)}</strong>
+                                </div>
+
+                                <div class="ticket-detail">
+                                    <span>ประเภทกีฬา</span>
+                                    <strong>${escapeHTML(booking.sport)}</strong>
+                                </div>
+
+                                <div class="ticket-detail">
+                                    <span>สนาม</span>
+                                    <strong>${escapeHTML(booking.court)}</strong>
+                                </div>
+
+                                <div class="ticket-detail">
+                                    <span>วันที่</span>
+                                    <strong>${escapeHTML(formatTicketDate(booking.date))}</strong>
+                                </div>
+
+                                <div class="ticket-detail">
+                                    <span>เวลา</span>
+                                    <strong>${escapeHTML(booking.time)}</strong>
+                                </div>
+
+                                <div class="ticket-detail">
+                                    <span>สถานที่</span>
+                                    <strong>📍 ${escapeHTML(booking.location)}</strong>
+                                </div>
+                            </div>
+
+                            <div class="ticket-total">
+                                <div>
+                                    <span>ราคาทั้งหมด</span>
+                                </div>
+                                <strong>฿${escapeHTML(booking.price ?? 0)}</strong>
+                            </div>
+
+                            <br>
+
+                            <button
+                                class="btn btn-primary print-ticket-btn"
+                                style="width:100%;"
+                                onclick="printTicketById('${escapeHTML(booking.id)}')">
+                                🖨️ พิมพ์ตั๋วใบนี้
+                            </button>
+
+                        </div>
+                    </div>
+                `).join("")}
+            `;
+        }
+
+        // เก็บชื่อเดิมไว้เพื่อให้โค้ดส่วนอื่นเรียกใช้งานได้
+        function renderTicket(booking) {
+            renderTicketList();
         }
 
         function loadLatestBooking() {
-            const latest = bookings.length ? bookings[bookings.length - 1] : null;
-            renderTicket(latest);
+            renderTicketList();
         }
 
         function cancelLatestBooking() {
@@ -3799,7 +3731,7 @@
 
             bookings.pop();
             localStorage.setItem("sportbookBookings", JSON.stringify(bookings));
-            loadLatestBooking();
+            renderTicketList();
             showToast("ยกเลิกการจองล่าสุดเรียบร้อยแล้ว ↩️");
         }
 
@@ -3825,26 +3757,36 @@
 
             localStorage.removeItem("sportbookBookings");
 
-            renderTicket(null);
+            renderTicketList();
 
             showToast("ล้างการจองทั้งหมดเรียบร้อยแล้ว 🗑️");
         }
 
 
         /* =========================================
-           PRINT TICKET
+           PRINT ONE TICKET
         ========================================== */
 
-        function printTicket() {
+        function printTicketById(bookingId) {
+            const booking = bookings.find(item => item.id === bookingId);
 
-            const ticket =
-                document.querySelector(
-                    ".ticket"
-                );
+            if (!booking) {
+                showToast("ไม่พบตั๋วการจองใบนี้ค่ะ");
+                return;
+            }
 
-            // สร้างสำเนาสำหรับหน้าพิมพ์เท่านั้น
-            // ปุ่มต่าง ๆ จะยังอยู่บนหน้าเว็บตามปกติ
-            const printTicketElement = ticket.cloneNode(true);
+            const sourceTicket = document.querySelector(
+                `.ticket[data-booking-id="${CSS.escape(bookingId)}"]`
+            );
+
+            if (!sourceTicket) {
+                showToast("ไม่พบตั๋วที่ต้องการพิมพ์ค่ะ");
+                return;
+            }
+
+            const printTicketElement = sourceTicket.cloneNode(true);
+
+            // เอาปุ่มออกเฉพาะสำเนาที่ใช้พิมพ์
             printTicketElement.querySelectorAll("button").forEach(button => {
                 button.remove();
             });
@@ -3856,156 +3798,141 @@
                 return;
             }
 
-            if (document.getElementById("ticketId").textContent.trim() === "-") {
-                printWindow.close();
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="th">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>SportBook Ticket - ${escapeHTML(booking.id)}</title>
+                    <style>
+                        * { box-sizing: border-box; }
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 40px;
+                            background: #f5f8fc;
+                            color: #172033;
+                        }
+                        .ticket {
+                            max-width: 700px;
+                            margin: auto;
+                            background: white;
+                            border: 1px solid #ddd;
+                            border-radius: 20px;
+                            overflow: hidden;
+                            box-shadow: none;
+                        }
+                        .ticket-header {
+                            background: #071A33;
+                            color: white;
+                            padding: 25px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .ticket-header h2 { margin: 0 0 5px; }
+                        .ticket-header p { margin: 0; }
+                        .ticket-status {
+                            background: #DCFCE7;
+                            color: #15803D;
+                            padding: 7px 14px;
+                            border-radius: 20px;
+                            font-size: 13px;
+                            font-weight: 600;
+                        }
+                        .ticket-content { padding: 25px; }
+                        .ticket-logo {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            color: #1769E0;
+                            font-size: 20px;
+                            font-weight: 800;
+                            margin-bottom: 25px;
+                        }
+                        .logo-mark {
+                            width: 42px !important;
+                            height: 42px !important;
+                            border-radius: 50%;
+                            background: #071A33;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: 2px solid #D4AF37;
+                        }
+                        .logo-mark svg { width: 38px; height: 38px; }
+                        .ticket-details {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 15px;
+                        }
+                        .ticket-detail {
+                            background: #f8fafc;
+                            padding: 15px;
+                            border-radius: 10px;
+                            border: 1px solid #e2e8f0;
+                        }
+                        .ticket-detail span {
+                            display: block;
+                            color: #64748b;
+                            font-size: 13px;
+                            margin-bottom: 4px;
+                        }
+                        .ticket-detail strong { color: #071A33; }
+                        .ticket-total {
+                            margin-top: 25px;
+                            padding-top: 20px;
+                            border-top: 2px dashed #ddd;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .ticket-total strong {
+                            font-size: 25px;
+                            color: #1769E0;
+                        }
+                        @media print {
+                            body {
+                                padding: 0;
+                                background: white;
+                            }
+                            .ticket {
+                                border: none;
+                            }
+                        }
+                        @media (max-width: 600px) {
+                            body { padding: 15px; }
+                            .ticket-details { grid-template-columns: 1fr; }
+                            .ticket-header {
+                                flex-direction: column;
+                                align-items: flex-start;
+                                gap: 12px;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${printTicketElement.outerHTML}
+                </body>
+                </html>
+            `);
+
+            printWindow.document.close();
+            printWindow.focus();
+
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        // ชื่อเดิมยังใช้ได้ ถ้ามีปุ่มหรือโค้ดเก่าเรียก printTicket()
+        function printTicket() {
+            if (bookings.length === 0) {
                 showToast("ยังไม่มีตั๋วการจองให้พิมพ์ค่ะ");
                 return;
             }
 
-            printWindow.document.write(`
-
-                <!DOCTYPE html>
-
-                <html lang="th">
-
-                <head>
-
-                    <meta charset="UTF-8">
-
-                    <title>
-                        SportBook Ticket
-                    </title>
-
-                    <style>
-
-                        body {
-                            font-family:
-                                Arial,
-                                sans-serif;
-
-                            padding: 40px;
-
-                            background:
-                                #f5f8fc;
-                        }
-
-                        .ticket {
-                            max-width:
-                                700px;
-
-                            margin:
-                                auto;
-
-                            background:
-                                white;
-
-                            border:
-                                1px solid
-                                #ddd;
-
-                            border-radius:
-                                20px;
-
-                            overflow:
-                                hidden;
-                        }
-
-                        .ticket-header {
-                            background:
-                                #071A33;
-
-                            color:
-                                white;
-
-                            padding:
-                                25px;
-                        }
-
-                        .ticket-content {
-                            padding:
-                                25px;
-                        }
-
-                        .ticket-details {
-                            display:
-                                grid;
-
-                            grid-template-columns:
-                                1fr 1fr;
-
-                            gap:
-                                15px;
-                        }
-
-                        .ticket-detail {
-                            background:
-                                #f8fafc;
-
-                            padding:
-                                15px;
-
-                            border-radius:
-                                10px;
-                        }
-
-                        .ticket-detail span {
-                            display:
-                                block;
-
-                            color:
-                                #64748b;
-
-                            font-size:
-                                13px;
-                        }
-
-                        .ticket-total {
-                            margin-top:
-                                25px;
-
-                            padding-top:
-                                20px;
-
-                            border-top:
-                                2px dashed
-                                #ddd;
-
-                            display:
-                                flex;
-
-                            justify-content:
-                                space-between;
-                        }
-
-                    </style>
-
-                </head>
-
-                <body>
-
-                    ${printTicketElement.outerHTML}
-
-                </body>
-
-                </html>
-
-            `);
-
-
-            printWindow.document.close();
-
-
-            printWindow.focus();
-
-
-            setTimeout(() => {
-
-                printWindow.print();
-
-            }, 500);
-
+            printTicketById(bookings[bookings.length - 1].id);
         }
-
 
 
         /* =========================================
